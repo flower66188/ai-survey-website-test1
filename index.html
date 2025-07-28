@@ -97,12 +97,12 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 15px;
-      margin-top: 20px;
+      margin-top: 10px;
     }
     .card {
       background: var(--color-card);
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
       overflow: hidden;
       text-align: center;
       padding: 10px;
@@ -141,6 +141,24 @@
     .survey-button:hover {
       background: var(--color-primary);
     }
+    .team-group-title {
+      font-size: 1.2rem;
+      color: #333;
+      margin: 30px 10px 10px;
+      border-left: 5px solid var(--color-primary);
+      padding-left: 10px;
+    }
+    .card details summary {
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--color-secondary);
+      margin-top: 5px;
+    }
+    .card details[open] p {
+      margin-top: 5px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
@@ -170,24 +188,72 @@
   </section>
 
   <section id="team">
-  <h2>团队成员</h2>
-  <div class="cards">
-    <div class="card"><img src="李培铨.jpg" alt="李培铨"><h3>李培铨</h3><p>指导老师 | 信息工程学院</p></div>
-    <div class="card"><img src="牟铨波.jpg" alt="牟铨波"><h3>牟铨波</h3><p>带队老师 | 信息工程学院</p></div>
-    <div class="card"><img src="张舜.jpg" alt="张舜"><h3>张舜</h3><p>队长 | 计算机科学与技术</p></div>
-   <div class="card"><img src="赵雅琪.jpg" alt="赵雅琪"><h3>赵雅琪</h3><p>副队长 | 信息与计算科学</p></div>
-    <div class="card"><img src="李佳乐.jpg" alt="李佳乐"><h3>李佳乐</h3><p>计算机科学与技术 | 信息工程学院</p></div>
-    <div class="card"><img src="梅欣雨.jpg" alt="梅欣雨"><h3>梅欣雨</h3><p>大数据技术 | 信息工程学院</p></div>
-    <div class="card"><img src="李菲.jpg" alt="李菲"><h3>李菲</h3><p>计算机科学与技术 | 信息工程学院</p></div>
-    <div class="card"><img src="宋冰艳.jpg" alt="宋冰艳"><h3>宋冰艳</h3><p>计算机科学与技术 | 信息工程学院</p></div>
-    <div class="card"><img src="王玟.jpg" alt="王玟"><h3>王玟</h3><p>食品质量与安全 | 食品科学与工程学院</p></div>
-    <div class="card"><img src="殷璐.jpg" alt="殷璐"><h3>殷璐</h3><p>水土保持与荒漠化防治 | 水保学院</p></div>
-    <div class="card"><img src="张蕊.jpg" alt="张蕊"><h3>张蕊</h3><p>金融学 | 经济管理学院</p></div>
-    <div class="card"><img src="蒋泊远.jpg" alt="蒋泊远"><h3>蒋泊远</h3><p>市场营销 | 经济管理学院</p></div>
-    <div class="card"><img src="王宸.jpg" alt="王宸"><h3>王宸</h3><p>地理信息科学 | 资源环境学院</p></div>
-  </div>
-</section>
+    <h2>团队成员</h2>
 
+    <h3 class="team-group-title">老师组</h3>
+    <div class="cards">
+      <div class="card"><img src="李培铨.jpg" alt="李培铨">
+        <h3>李培铨</h3><p>指导老师 | 信息工程学院</p>
+        <details><summary>查看详情</summary><p>研究方向、联系方式等</p></details>
+      </div>
+      <div class="card"><img src="牟铨波.jpg" alt="牟铨波">
+        <h3>牟铨波</h3><p>带队老师 | 信息工程学院</p>
+        <details><summary>查看详情</summary><p>研究方向、联系方式等</p></details>
+      </div>
+    </div>
+
+    <h3 class="team-group-title">队长组</h3>
+    <div class="cards">
+      <div class="card"><img src="张舜.jpg" alt="张舜">
+        <h3>张舜</h3><p>队长 | 计算机科学与技术</p>
+        <details><summary>查看详情</summary><p>擅长数据分析与项目管理</p></details>
+      </div>
+      <div class="card"><img src="赵雅琪.jpg" alt="赵雅琪">
+        <h3>赵雅琪</h3><p>副队长 | 信息与计算科学</p>
+        <details><summary>查看详情</summary><p>擅长逻辑建模与调研执行</p></details>
+      </div>
+    </div>
+
+    <h3 class="team-group-title">队员组</h3>
+    <div class="cards">
+      <div class="card"><img src="李佳乐.jpg" alt="李佳乐">
+        <h3>李佳乐</h3><p>计算机科学与技术 | 信息工程学院</p>
+        <details><summary>查看详情</summary><p>熟悉前端开发</p></details>
+      </div>
+      <div class="card"><img src="梅欣雨.jpg" alt="梅欣雨">
+        <h3>梅欣雨</h3><p>大数据技术 | 信息工程学院</p>
+        <details><summary>查看详情</summary><p>擅长数据挖掘</p></details>
+      </div>
+      <div class="card"><img src="李菲.jpg" alt="李菲">
+        <h3>李菲</h3><p>计算机科学与技术 | 信息工程学院</p>
+        <details><summary>查看详情</summary><p>图像处理方向</p></details>
+      </div>
+      <div class="card"><img src="宋冰艳.jpg" alt="宋冰艳">
+        <h3>宋冰艳</h3><p>计算机科学与技术 | 信息工程学院</p>
+        <details><summary>查看详情</summary><p>擅长调研与采访</p></details>
+      </div>
+      <div class="card"><img src="王玟.jpg" alt="王玟">
+        <h3>王玟</h3><p>食品质量与安全 | 食品科学与工程学院</p>
+        <details><summary>查看详情</summary><p>注重食品与健康科普</p></details>
+      </div>
+      <div class="card"><img src="殷璐.jpg" alt="殷璐">
+        <h3>殷璐</h3><p>水土保持与荒漠化防治 | 水保学院</p>
+        <details><summary>查看详情</summary><p>环境与生态方向</p></details>
+      </div>
+      <div class="card"><img src="张蕊.jpg" alt="张蕊">
+        <h3>张蕊</h3><p>金融学 | 经济管理学院</p>
+        <details><summary>查看详情</summary><p>擅长经济政策分析</p></details>
+      </div>
+      <div class="card"><img src="蒋泊远.jpg" alt="蒋泊远">
+        <h3>蒋泊远</h3><p>市场营销 | 经济管理学院</p>
+        <details><summary>查看详情</summary><p>市场调研与传播</p></details>
+      </div>
+      <div class="card"><img src="王宸.jpg" alt="王宸">
+        <h3>王宸</h3><p>地理信息科学 | 资源环境学院</p>
+        <details><summary>查看详情</summary><p>GIS 应用分析</p></details>
+      </div>
+    </div>
+  </section>
 
   <section id="schedule">
     <h2>进度安排</h2>

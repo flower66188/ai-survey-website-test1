@@ -4,16 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>智享生活·智汇新风 | 社会实践</title>
-    <!-- 引入 Google 字体 -->
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Index Navigation Styles */
-        .index-nav { background: #fff; padding: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        .index-nav .section-container { display: flex; justify-content: center; gap: 20px; }
-        .index-nav a { font-size: 0.95rem; color: var(--color-secondary); padding: 6px 12px; border: 1px solid var(--color-secondary); border-radius: 4px; transition: background .3s, color .3s; }
-        .index-nav a:hover { background: var(--color-secondary); color: #fff; }
-
-        <style>
         :root {
             --color-primary: #005ea5;
             --color-secondary: #f5a623;
@@ -24,39 +16,34 @@
             --text-muted: #616161;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'PT Sans', sans-serif; background: var(--color-bg); color: var(--text-dark); }
+        body { font-family: 'PT Sans', sans-serif; background: var(--color-bg); color: var(--text-dark); overflow-x: hidden; }
         h1, h2, h3 { font-family: 'Roboto Slab', serif; color: var(--color-primary); }
         a { color: var(--color-primary); text-decoration: none; }
 
-        /* Header */
         header { background: var(--color-primary); color: var(--text-light); padding: 20px 0; position: sticky; top: 0; z-index: 10; }
-        .header-container { width: 90%; max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
-        .logo-title h1 { font-size: 1.8rem; }
-        .logo-row img { height: 40px; margin: 0 10px; vertical-align: middle; }
-        nav ul { list-style: none; display: flex; gap: 20px; }
+        .header-container { width: 90%; max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+        .logo-title h1 { font-size: 1.8rem; text-align: center; }
+        .logo-row img { height: 40px; margin: 5px; vertical-align: middle; max-width: 100%; }
+        nav ul { list-style: none; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
         nav a { font-weight: bold; padding: 8px 12px; border-radius: 4px; transition: background .3s; }
         nav a:hover { background: rgba(255,255,255,0.2); }
 
-        /* Hero */
         .hero { background: url('hero-bg.jpg') center/cover no-repeat, linear-gradient(135deg, rgba(0,94,165,0.8), rgba(245,166,35,0.8)); color: var(--text-light); text-align: center; padding: 100px 20px; }
         .hero h2 { font-size: 2.5rem; margin-bottom: 10px; }
         .hero p { font-size: 1.2rem; }
 
-        /* Sections */
         section { padding: 60px 0; }
         .section-container { width: 85%; max-width: 1000px; margin: auto; }
         section h2 { font-size: 2rem; margin-bottom: 30px; text-align: center; }
 
-        /* Cards */
         .cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 20px; }
         .card { background: var(--color-card); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform .3s; }
         .card:hover { transform: translateY(-8px); }
-        .card img { width: 100%; height: 140px; object-fit: cover; }
+        .card img { width: 100%; height: auto; object-fit: cover; max-width: 100%; }
         .card-body { padding: 20px; text-align: center; }
         .card-body h3 { margin-bottom: 8px; font-size: 1.2rem; }
         .card-body p { font-size: 0.9rem; color: var(--text-muted); }
 
-        /* Timeline */
         .timeline { position: relative; padding-left: 20px; }
         .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 4px; background: var(--color-secondary); }
         .timeline-item { position: relative; margin-bottom: 30px; padding-left: 40px; }
@@ -65,21 +52,19 @@
         .timeline-item h3 { margin-bottom: 5px; font-size: 1.1rem; color: var(--color-primary); }
         .timeline-item p { font-size: 0.9rem; color: var(--text-muted); }
 
-        /* Lists */
         ul.custom-list { list-style: none; padding-left: 0; }
         ul.custom-list li { position: relative; padding-left: 25px; margin-bottom: 12px; }
         ul.custom-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--color-secondary); }
 
-        /* Contact */
         .contact-form { max-width: 500px; margin: auto; background: var(--color-card); padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .contact-form label { display: block; margin-bottom: 6px; font-weight: bold; }
         .contact-form input, .contact-form textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 15px; }
         .contact-form button { width: 100%; padding: 12px; background: var(--color-secondary); border: none; color: #fff; font-size: 1rem; border-radius: 4px; cursor: pointer; transition: background .3s; }
         .contact-form button:hover { background: var(--color-primary); }
 
-        /* Footer */
         footer { background: var(--color-primary); color: var(--text-light); text-align: center; padding: 20px 0; margin-top: 40px; }
-    .survey-button {
+
+        .survey-button {
             display: inline-block;
             background-color: var(--color-secondary);
             color: #fff;
@@ -93,7 +78,55 @@
             background-color: var(--color-primary);
             transform: translateY(-2px);
         }
-</style>
+
+        @media (max-width: 768px) {
+            .header-container,
+            .section-container {
+                width: 95%;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .logo-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .logo-row img {
+                height: 30px;
+                margin: 5px;
+            }
+
+            nav ul.nav-links {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .timeline-item {
+                padding-left: 30px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .index-nav .section-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>

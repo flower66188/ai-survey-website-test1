@@ -1,265 +1,385 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>智享生活·智汇新风 | 社会实践</title>
-  <!-- SEO -->
-  <meta name="description" content="智享生活·智汇新风社会实践项目，探索乡村 AI 认知，分享调研成果与日记。" />
-  <meta name="keywords" content="社会实践, AI认知, 乡村调研, 西北农林科技大学, 智享生活" />
-  <link rel="icon" href="favicon.ico" />
-
-  <!-- 社交预览 -->
-  <meta property="og:title" content="智享生活·智汇新风 | 社会实践" />
-  <meta property="og:description" content="探索乡村 AI 认知，共塑智慧基层服务新未来。" />
-  <meta property="og:image" content="share-image.png" />
-  <meta property="og:type" content="website" />
-
   <!-- 字体 & 图标 & 动画 & 相册 & 地图 -->
-  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;600;700&family=Roboto+Slab:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <style>
     :root {
-      --color-primary: #005ea5;
-      --color-secondary: #f5a623;
-      --color-bg: #f0f4f8;
-      --color-card: #ffffff;
-      --text-dark: #333;
-      --text-light: #fff;
-      --text-muted: #616161;
+      --main-blue: #004c97;
+      --main-orange: #f5a623;
+      --gray-bg: #f7fafc;
+      --light: #fafafa;
+      --green: #16a085;
+      --footer-gray: #333;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin:0; padding:0;}
     body {
       font-family: 'PT Sans', sans-serif;
-      background: var(--color-bg);
-      color: var(--text-dark);
+      background: linear-gradient(135deg, #e8f0f8, var(--gray-bg));
+      color: #333;
       scroll-behavior: smooth;
+      line-height: 1.6;
     }
-    h1, h2, h3 { font-family: 'Roboto Slab', serif; }
+    a { text-decoration:none; color:inherit; }
+    h1,h2,h3 { font-family: 'Roboto Slab', serif; }
+    /* 顶部Header */
     header {
-      background: var(--color-primary);
-      color: var(--text-light);
-      padding: 20px;
-      text-align: center;
+      background: var(--main-blue);
+      color:#fff;
+      padding:30px 20px 22px;
+      text-align:center;
+      box-shadow:0 4px 10px rgba(0,0,0,0.12);
+      position:relative;
     }
+    header h1 {
+      font-size:2.6rem; letter-spacing:2px;
+      text-shadow:1px 2px 6px rgba(0,0,0,0.14);
+      font-weight: 700;
+    }
+    header .logo {
+      position: absolute; right:20px; top:50%; transform:translateY(-50%);
+      height:44px;
+    }
+    /* 导航栏 */
     nav {
-      background: var(--color-card);
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
-      padding: 10px 0; font-size: .9rem;
+      background:#fff;
+      display:flex; flex-wrap:wrap; justify-content:center; align-items: center;
+      gap:15px; padding:16px 0; position:sticky; top:0; z-index:200;
+      box-shadow:0 2px 6px rgba(0,0,0,0.07);
+      border-bottom: 2px solid #f0f3fa;
     }
     nav a {
-      color: var(--color-primary); text-decoration: none;
-      padding: 6px 12px; border-radius: 4px;
-      transition: background .3s;
+      color:var(--main-blue); padding:8px 18px;
+      border-radius:24px; font-weight:600;
+      transition:background .25s, color .25s;
+      position: relative;
     }
-    nav a:hover {
-      background: var(--color-primary); color: var(--text-light);
+    nav a.active, nav a:hover {
+      background:var(--main-blue); color:#fff;
     }
-    nav a .fas { margin-right: 5px; }
-
+    nav a .fas { margin-right:7px; }
+    /* 英雄区 */
     .hero {
-      background: linear-gradient(135deg, rgba(0,94,165,0.9), rgba(245,166,35,0.9));
-      color: var(--text-light); text-align: center; padding: 50px 20px;
+      background: linear-gradient(rgba(0,76,151,.82),rgba(33, 74, 139,0.52)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      color:#fff; text-align:center; padding:90px 18px 70px; margin-bottom:44px;
+      border-radius:0 0 40px 40px;
+      box-shadow:0 8px 36px rgba(0,60,150,0.08);
+      position:relative;
     }
-    .hero h2 { font-size: 1.6rem; }
-    .hero p { margin-top: 10px; }
-
+    .hero h2 {
+      font-size:2.3rem; margin-bottom:14px;
+      text-shadow:1px 2px 10px rgba(0,0,0,0.16);
+    }
+    .hero p {
+      font-size:1.22rem; opacity:0.97; margin-bottom:34px;
+    }
+    .hero .hero-btn {
+      display:inline-block; margin-top:5px;
+      background:var(--main-orange);
+      color:var(--main-blue); font-weight:700;
+      padding:12px 32px; border-radius:32px;
+      font-size:1.13rem; box-shadow:0 2px 12px rgba(0,0,0,.08);
+      transition:.25s;
+      border:none; cursor:pointer;
+      letter-spacing: 2px;
+    }
+    .hero .hero-btn:hover {
+      background:var(--main-blue); color:#fff;
+      box-shadow:0 5px 20px rgba(0,76,151,0.13);
+      letter-spacing: 4px;
+    }
+    /* 通用区块 */
     section {
-      max-width: 960px; margin: auto; padding: 30px 20px;
+      max-width:960px; margin:auto; padding:44px 20px 38px;
+      background:#fff; border-radius:14px;
+      box-shadow:0 3px 20px rgba(0,0,0,0.05);
+      margin-bottom:48px;
     }
     section h2 {
-      text-align: center; color: var(--color-primary);
-      margin-bottom: 20px; font-size: 1.5rem;
+      position:relative; font-size:1.85rem; margin-bottom:23px;
+      color:var(--main-blue); font-weight:700;
+      letter-spacing: 1.5px;
     }
-    p, li { line-height: 1.6; font-size: .95rem; }
-
+    section h2::after {
+      content:''; width:68px; height:4px;
+      background:var(--main-orange); position:absolute; left:50%; bottom:-12px;
+      transform:translateX(-50%); border-radius:2px;
+    }
+    /* 团队成员 */
     .team-group-title {
-      font-size: 1.2rem; color: var(--text-dark);
-      margin: 30px 0 10px; border-left: 5px solid var(--color-primary);
-      padding-left: 10px;
+      font-size:1.22rem; margin:34px 0 18px; color:var(--main-blue);
     }
     .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-      gap: 15px; margin-top: 10px;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(192px,1fr));
+      gap:22px;
     }
     .card {
-      background: var(--color-card); border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.05);
-      text-align: center; padding: 10px;
+      background:var(--light);
+      border-radius:12px; overflow:hidden; text-align:center;
+      transition:transform .25s, box-shadow .28s;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+      position: relative;
+    }
+    .card:hover {
+      transform:translateY(-10px) scale(1.03);
+      box-shadow:0 10px 32px rgba(0,76,151,0.13);
+      border:2px solid var(--main-orange);
+      z-index:1;
     }
     .card img {
-      width: 100%; height: 120px; object-fit: cover;
+      width:100%; aspect-ratio: 1.4/1; object-fit:cover;
+      border-radius:12px 12px 0 0;
+      transition:filter .24s;
+      filter: grayscale(10%);
     }
-    .card h3 { margin: 10px 0 5px; font-size: 1rem; }
-    .card p { font-size: .85rem; color: var(--text-muted); }
+    .card:hover img { filter: grayscale(0%); }
+    .card h3 {
+      font-size:1.12rem; margin:13px 0 6px; color:var(--main-blue);
+      font-weight: 600;
+    }
+    .card p {
+      font-size:.96rem; color:#666; padding:0 10px 12px;
+    }
     .card details summary {
-      cursor: pointer; margin-top: 5px;
-      font-size: .85rem; color: var(--color-secondary);
+      cursor:pointer; font-size:.87rem; color:var(--main-orange);
+      margin-bottom:8px; user-select:none;
+      font-weight: 600;
     }
     .card details[open] p {
-      margin-top: 5px; font-size: .85rem; color: var(--text-muted);
+      font-size:.88rem; color:#555; padding:0 10px 13px;
     }
-
-    .timeline {
-      position: relative; padding: 20px 0; margin: 20px 0;
+    .card .member-extra {
+      margin-top:6px;
+      display: flex; flex-direction: row; justify-content:center; gap:13px;
+      font-size: 1.1em;
     }
-    .timeline::before {
-      content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
-      width: 2px; background: var(--color-primary);
+    .card .member-extra a {
+      color: var(--main-blue);
+      transition: color 0.2s;
     }
-    .timeline-item {
-      position: relative; width: 50%; padding: 10px 20px;
+    .card .member-extra a:hover { color: var(--main-orange);}
+    /* 时间轴 */
+    .tl { position:relative; padding-left:54px; margin-top:20px;}
+    .tl::before {
+      content:''; position:absolute; left:30px; top:0; bottom:0;
+      width:5px; background:linear-gradient(to bottom, var(--main-blue), var(--main-orange));
+      border-radius:3px;
     }
-    .timeline-item:nth-child(odd) { left: 0; }
-    .timeline-item:nth-child(even) { left: 50%; }
-    .timeline-item::before {
-      content: ''; position: absolute; top: 15px;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--color-secondary);
-      border: 3px solid var(--color-card);
+    .tl-item {
+      position:relative; margin-bottom:34px; cursor:pointer;
+      transition:transform .3s;
+      padding-left:10px;
     }
-    .timeline-item:nth-child(odd)::before { right: -6px; }
-    .timeline-item:nth-child(even)::before { left: -6px; }
-    .timeline-content {
-      background: var(--color-card); padding: 10px;
-      border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    .tl-item:hover { transform:translateX(7px);}
+    .tl-item::before {
+      content:''; position:absolute; left:-10px; top:4px;
+      width:22px; height:22px; background:var(--main-orange);
+      border:4px solid #fff; border-radius:50%;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      transition:background .3s;
+      z-index: 1;
     }
-    .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
-
-    .outcome-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-      gap: 15px; margin-top: 20px;
+    .tl-item.open::before, .tl-item:hover::before { background:var(--main-blue);}
+    .tl-item strong {
+      display:inline-block; font-size:1.12rem; color:var(--main-blue);
+      margin-bottom:8px; font-weight: 600;
     }
-    .outcome-card {
-      background: var(--color-card); padding: 15px;
-      border-radius: 8px; text-align: center;
-      box-shadow: 0 1px 3px rgba(0,0,0,.05);
+    .tl-item .tl-hint {
+      display: inline-block;
+      margin-left: 8px; color: #aaa; font-size: .93em;
+      font-style: italic;
+      letter-spacing: 1px;
+      vertical-align: middle;
+      animation: tlhintfade 1s linear infinite alternate;
     }
-    .outcome-card .fas {
-      font-size: 2rem; margin-bottom: 10px;
-      color: var(--color-primary);
+    @keyframes tlhintfade {
+      from { opacity: 0.85;}
+      to   { opacity: 0.2;}
     }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-      gap: 10px; margin-top: 20px;
+    .tl-detail {
+      max-height:0; overflow:hidden;
+      background:#f7faff; margin-top:10px; border-radius:6px;
+      border-left:4px solid var(--main-orange);
+      transition:max-height .52s cubic-bezier(.69,0,.58,1.1), padding .5s;
+      padding:0 0;
     }
-    .gallery-item img {
-      width: 100%; height: 120px; object-fit: cover;
-      border-radius: 6px; cursor: pointer;
+    .tl-item.open .tl-detail {
+      max-height:1000px; padding:17px 22px;
     }
-
-    .diary-entry { margin-bottom: 20px; }
-    .diary-entry h4 {
-      font-size: 1.1rem; margin-bottom: 5px; color: var(--color-primary);
+    .tl-detail ul { list-style:disc inside; color:#555; }
+    .tl-detail .gallery,
+    .tl-detail .diary-entry { margin-top:17px; }
+    .tl-detail .gallery {
+      display:flex; flex-wrap:wrap; gap:13px; justify-content: flex-start;
     }
-
-    #map {
-      width: 100%; height: 300px; border-radius: 8px; margin-top: 10px;
+    .tl-detail .gallery img {
+      width:80px; height:56px; object-fit:cover;
+      border-radius:4px; box-shadow:0 1px 6px rgba(0,0,0,0.07);
+      transition: transform .2s;
     }
-
-    .survey-section { text-align: center; }
+    .tl-detail .gallery img:hover {
+      transform:scale(1.13);
+      border:2px solid var(--main-orange);
+    }
+    #timeline-map {
+      width:100%; height:300px; margin-top:10px; border-radius:6px;
+      box-shadow: 0 2px 7px rgba(0,76,151,0.08);
+    }
+    /* 资源宝库 */
+    #resources .filter-bar {
+      text-align:center; margin-bottom:23px; overflow-x:auto; white-space:nowrap;
+    }
+    #resources .filter-bar {
+      scrollbar-width:thin;
+    }
+    #resources .filter-bar button {
+      display: inline-block;
+      margin:0 9px 6px 0; padding:6px 14px;
+      border:none; border-radius:5px; background:#e2e8f0;
+      cursor:pointer; transition:background .23s, color .24s;
+      font-size: 1.01em;
+      min-width: 68px;
+    }
+    #resources .filter-bar button.active {
+      background:var(--main-blue); color:#fff;
+    }
+    #resources .cards {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(166px,1fr));
+      gap:16px;
+    }
+    #resources .cards .card {
+      background:var(--light); padding:13px 10px 10px;
+      border-radius:6px; text-align:center; box-shadow:0 1px 8px rgba(0,0,0,0.07);
+      cursor: pointer;
+      transition:box-shadow .22s, transform .2s, border .2s;
+      border:1.5px solid #f0f3fa;
+    }
+    #resources .cards .card:hover {
+      background: #fff8ef;
+      box-shadow: 0 6px 16px rgba(245,166,35,0.09);
+      transform: translateY(-6px) scale(1.03);
+      border:2px solid var(--main-orange);
+    }
+    #resources .cards .card img {
+      width:100%; aspect-ratio: 1.7/1; object-fit:cover; border-radius:4px;
+    }
+    #resources .cards .card p { margin:10px 0 6px; font-size:1.02rem; font-weight: 600;}
+    #resources .cards .card small { color:#888;}
+    /* 问卷 */
+    .survey-section { text-align:center;}
     .survey-card {
-      display: inline-block; background: var(--color-card);
-      padding: 20px; border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.1);
-      margin-top: 15px;
+      display:inline-block; background:#f9f9f9;
+      padding:26px 36px 27px; border-radius:11px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.07);
+      margin-top:15px; transition:box-shadow .23s;
+      min-width:270px;
     }
-    .survey-card .fas { font-size: 1.5rem; color: var(--color-secondary); }
-    .survey-card p { margin: 5px 0; }
+    .survey-card:hover { box-shadow:0 6px 24px rgba(0,0,0,0.14);}
+    .survey-card .fas {
+      font-size:2.3rem; color:var(--main-orange); margin-bottom:12px;
+    }
+    .survey-card p { font-size:1.06rem; color:#333; }
     .survey-card a {
-      display: inline-block; margin-top: 10px;
-      background: var(--color-secondary); color: #fff;
-      padding: 10px 20px; border-radius: 5px;
-      text-decoration: none; font-weight: bold;
+      display:inline-block; margin-top:14px;
+      background:var(--main-blue); color:#fff;
+      padding:12px 26px; border-radius:27px;
+      font-weight:600; transition:background .21s;
+      font-size:1.07rem;
     }
-    .survey-card a:hover { background: var(--color-primary); }
-
-    .feedback-form {
-      max-width: 600px; margin: auto;
-      padding: 20px; background: var(--color-card);
-      border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
-    }
-    .feedback-form label {
-      display: block; margin-bottom: 10px; font-size: .95rem;
-    }
-    .feedback-form input, .feedback-form textarea {
-      width: 100%; padding: 8px; border: 1px solid #ccc;
-      border-radius: 4px; font-size: .95rem;
-    }
-    .feedback-form textarea { height: 100px; resize: vertical; }
-
-    .feedback-form button {
-      margin-top: 10px; padding: 10px 20px;
-      background: var(--color-secondary); color: #fff;
-      border: none; border-radius: 5px; cursor: pointer;
-      font-size: 1rem;
-    }
-    .feedback-form button:hover { background: var(--color-primary); }
-
-    /* 合作机构：静态居中 */
-    #partners {
-      text-align: center; padding: 30px 0;
-      background: var(--color-card);
-    }
-    .partners {
-      display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 40px;
-      margin-top: 10px;
-    }
-    .partner {
-      text-align: center;
-    }
-    .partner img {
-      height: 60px; display: block; margin: 0 auto 8px;
-    }
-    .partner p {
-      font-size: .9rem; color: var(--text-dark);
-    }
-
+    .survey-card a:hover { background:var(--main-orange); color:var(--main-blue);}
+    /* 联系我们 */
+    #contact p { font-size:1.08rem; color:#333; margin:11px 0;}
+    #contact p span { font-weight:700; color:var(--main-blue);}
+    /* Footer */
     footer {
-      background: var(--color-primary);
-      color: var(--text-light);
-      text-align: center;
-      padding: 20px 10px;
-      font-size: .9rem;
+      background: var(--footer-gray); color:#fff;
+      text-align:center; padding:22px 10px 13px;
+      font-size:1.01rem; box-shadow:0 -2px 8px rgba(0,0,0,0.10);
+      border-radius:16px 16px 0 0;
+      margin-bottom:0;
+      position:relative;
     }
-
+    footer .footer-links {
+      margin-top:7px; font-size:.98em;
+    }
+    footer .footer-links a {
+      color:#fae28a;
+      margin:0 8px; text-decoration: underline; transition: color 0.2s;
+    }
+    footer .footer-links a:hover { color:var(--main-orange);}
+    footer img.footer-logo {
+      height:34px; vertical-align:middle; margin-right:12px; opacity: 0.86;
+      display: inline-block;
+    }
+    /* 回到顶部按钮 */
+    #backToTop {
+      display: none;
+      position:fixed; right:18px; bottom:36px; z-index:999;
+      background: var(--main-blue); color:#fff;
+      border-radius:50%; width:52px; height:52px;
+      border:none; box-shadow: 0 2px 12px rgba(0,76,151,.13);
+      font-size:2rem; cursor:pointer; transition:background 0.21s;
+      align-items:center; justify-content:center; outline: none;
+      opacity: 0.87;
+    }
+    #backToTop:hover { background: var(--main-orange); color:var(--main-blue);}
+    /* 响应式优化 */
+    @media (max-width: 780px) {
+      .hero { padding:54px 10px 38px; font-size:0.98em;}
+      section { padding:23px 5vw 19px;}
+      nav { gap:8px;}
+      .cards { grid-template-columns:repeat(auto-fit,minmax(147px,1fr)); gap:14px;}
+      #resources .cards { gap:10px;}
+    }
+    @media (max-width:500px) {
+      header {padding:18px 5px 14px;}
+      .hero { padding:33px 3vw 22px; border-radius:0 0 17px 17px;}
+      section { padding:16px 3vw 10px;}
+      .tl { padding-left:19px;}
+      .tl::before { left:7px;}
+      .tl-item { margin-bottom:18px;}
+      .tl-item::before { left:-20px; width:16px; height:16px;}
+      #backToTop { width:39px; height:39px; font-size:1.3rem;}
+    }
+    @media (max-width:390px) {
+      nav { gap:3px; font-size: 13px;}
+    }
     @media (prefers-color-scheme: dark) {
-      body { background: #121212; color: #eee; }
-      nav, section, .card, .outcome-card, .timeline-content,
-      .survey-card, .feedback-form, #partners, footer {
-        background: #1e1e1e; color: #ccc;
+      body { background:#181c21; color:#eaeaea;}
+      header, nav, section, .survey-card, #resources .cards .card, footer {
+        background:#232c39; color:#ccc;
       }
+      .tl::before { background:#757575; }
+      .tl-item::before { background:var(--main-orange); border-color:#232c39;}
+      #backToTop { background: #2a3d5b; }
     }
   </style>
 </head>
 <body>
   <header data-aos="fade-down">
+    <img src="https://cdn.jsdelivr.net/gh/wutongtw/img@main/nwafu-logo.png" alt="西北农林科技大学" class="logo"/>
     <h1>智享生活·智汇新风</h1>
   </header>
-  <nav data-aos="fade-down" data-aos-delay="100">
+  <nav data-aos="fade-down" data-aos-delay="100" id="mainNav">
     <a href="#about"><i class="fas fa-info-circle"></i>关于项目</a>
     <a href="#team"><i class="fas fa-users"></i>团队成员</a>
-    <a href="#schedule"><i class="fas fa-calendar-alt"></i>进度安排</a>
-    <a href="#outcomes"><i class="fas fa-chart-bar"></i>成果展示</a>
-    <a href="#gallery"><i class="fas fa-images"></i>实践风采</a>
-    <a href="#diary"><i class="fas fa-book"></i>实践日记</a>
-    <a href="#map"><i class="fas fa-map-marker-alt"></i>调研地点</a>
+    <a href="#timeline"><i class="fas fa-stream"></i>实践事记</a>
+    <a href="#resources"><i class="fas fa-folder-open"></i>资源宝库</a>
     <a href="#survey"><i class="fas fa-edit"></i>问卷调查</a>
-    <a href="#feedback"><i class="fas fa-envelope"></i>反馈</a>
+    <a href="#contact"><i class="fas fa-phone"></i>联系我们</a>
   </nav>
 
   <section class="hero" data-aos="zoom-in">
     <h2>探索乡村 AI 认知</h2>
     <p>共塑智慧基层服务新未来</p>
+    <a class="hero-btn" href="#about">了解更多 &nbsp;<i class="fas fa-chevron-down"></i></a>
   </section>
 
   <section id="about" data-aos="fade-up">
@@ -269,94 +389,157 @@
 
   <section id="team" data-aos="fade-up">
     <h2>团队成员</h2>
-
     <h3 class="team-group-title">老师组</h3>
     <div class="cards">
       <div class="card" data-aos="flip-left">
-        <img src="李培铨.jpg" alt="李培铨" />
-        <h3>李培铨</h3>
-        <p>指导老师 | 信息工程学院</p>
-        <details><summary>查看详情</summary><p>研究方向：智慧教育；联系方式：****</p></details>
+        <img src="李培铨.jpg" alt="李培铨"/>
+        <h3>李培铨</h3><p>指导老师 | 信息工程学院</p>
+        <details><summary>查看详情</summary><p>研究方向：智慧教育；联系方式：<br>********</p>
+        <div class="member-extra">
+          <a href="mailto:example1@nwafu.edu.cn" title="邮箱"><i class="fas fa-envelope"></i></a>
+        </div>
+        </details>
       </div>
       <div class="card" data-aos="flip-left" data-aos-delay="100">
-        <img src="牟铨波.jpg" alt="牟铨波" />
-        <h3>牟铨波</h3>
-        <p>带队老师 | 信息工程学院</p>
-        <details><summary>查看详情</summary><p>研究方向：农村信息化；联系方式：****</p></details>
+        <img src="牟铨波.jpg" alt="牟铨波"/>
+        <h3>牟铨波</h3><p>带队老师 | 信息工程学院</p>
+        <details><summary>查看详情</summary><p>研究方向：农村信息化；联系方式：<br>********</p>
+        <div class="member-extra">
+          <a href="mailto:example2@nwafu.edu.cn" title="邮箱"><i class="fas fa-envelope"></i></a>
+        </div>
+        </details>
       </div>
     </div>
-
     <h3 class="team-group-title">队长组</h3>
     <div class="cards">
       <div class="card" data-aos="flip-left">
-        <img src="张舜.jpg" alt="张舜" />
-        <h3>张舜</h3>
-        <p>队长 | 计算机科学与技术</p>
-        <details><summary>查看详情</summary><p>擅长数据分析与项目管理</p></details>
+        <img src="张舜.jpg" alt="张舜"/><h3>张舜</h3><p>队长 | 计算机科学与技术</p>
+        <details><summary>查看详情</summary><p>擅长数据分析与项目管理；联系方式：19502913998</p>
+        <div class="member-extra">
+          <a href="mailto:zs@nwafu.edu.cn" title="邮箱"><i class="fas fa-envelope"></i></a>
+          <a href="https://weixin.qq.com/" title="微信"><i class="fab fa-weixin"></i></a>
+        </div>
+        </details>
       </div>
       <div class="card" data-aos="flip-left" data-aos-delay="100">
-        <img src="赵雅琪.jpg" alt="赵雅琪" />
-        <h3>赵雅琪</h3>
-        <p>副队长 | 信息与计算科学</p>
-        <details><summary>查看详情</summary><p>擅长逻辑建模与调研执行</p></details>
+        <img src="赵雅琪.jpg" alt="赵雅琪"/><h3>赵雅琪</h3><p>副队长 | 信息与计算科学</p>
+        <details><summary>查看详情</summary><p>擅长逻辑建模与调研执行；联系方式：********</p>
+        <div class="member-extra">
+          <a href="mailto:example3@nwafu.edu.cn" title="邮箱"><i class="fas fa-envelope"></i></a>
+        </div>
+        </details>
       </div>
     </div>
-
     <h3 class="team-group-title">队员组</h3>
     <div class="cards">
-      <div class="card" data-aos="flip-left"><img src="李佳乐.jpg" alt="李佳乐" /><h3>李佳乐</h3><p>计算机科学与技术 | 信息工程学院</p><details><summary>查看详情</summary><p>熟悉前端开发。</p></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="50"><img src="梅欣雨.jpg" alt="梅欣雨" /><h3>梅欣雨</h3><p>大数据技术 | 信息工程学院</p><details><summary>查看详情</summary><p>擅长数据挖掘。</p></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="100"><img src="李菲.jpg" alt="李菲" /><h3>李菲</h3><p>计算机科学与技术 | 信息工程学院</p><details><summary>查看详情</summary><p>图像处理方向。</p></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="150"><img src="宋冰艳.jpg" alt="宋冰艳" /><h3>宋冰艳</h3><p>计算机科学与技术 | 信息工程学院</p><details><summary>查看详情</summary><p>擅长调研与采访。</p></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="200"><img src="王玟.jpg" alt="王玟" /><h3>王玟</h3><p>食品质量与安全 | 食品科学与工程学院</p><details><summary>查看详情</summary><p>注重食品科普。</p></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="250"><img src="殷璐.jpg" alt="殷璐" /><h3>殷璐</h3><p>水土保持与荒漠化防治 | 水保学院</p><details><summary>查看详情</summary><p>环境与生态方向。</p></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="300"><img src="张蕊.jpg" alt="张蕊" /><h3>张蕊</h3><p>金融学 | 经济管理学院</p><details><summary>查看详情</summary><p>擅长经济政策分析。</p></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="350"><img src="蒋泊远.jpg" alt="蒋泊远" /><h3>蒋泊远</h3><p>市场营销 | 经济管理学院</p><details><summary>查看详情</summary><p>市场调研与传播。</p></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="400"><img src="王宸.jpg" alt="王宸" /><h3>王宸</h3><p>地理信息科学 | 资源环境学院</p><details><summary>查看详情</summary><p>GIS 应用分析。</p></details></div>
+      <div class="card" data-aos="flip-left"><img src="李佳乐.jpg" alt="李佳乐"/><h3>李佳乐</h3><p>计算机科学与技术</p><details><summary>查看详情</summary><p>熟悉前端开发。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="50"><img src="梅欣雨.jpg" alt="梅欣雨"/><h3>梅欣雨</h3><p>大数据技术</p><details><summary>查看详情</summary><p>擅长数据挖掘。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="100"><img src="李菲.jpg" alt="李菲"/><h3>李菲</h3><p>计算机科学与技术</p><details><summary>查看详情</summary><p>图像处理方向。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="150"><img src="宋冰艳.jpg" alt="宋冰艳"/><h3>宋冰艳</h3><p>计算机科学与技术</p><details><summary>查看详情</summary><p>擅长调研与采访。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="200"><img src="王玟.jpg" alt="王玟"/><h3>王玟</h3><p>食品质量与安全</p><details><summary>查看详情</summary><p>注重食品科普。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="250"><img src="殷璐.jpg" alt="殷璐"/><h3>殷璐</h3><p>水土保持与荒漠化防治</p><details><summary>查看详情</summary><p>环境与生态方向。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="300"><img src="张蕊.jpg" alt="张蕊"/><h3>张蕊</h3><p>金融学</p><details><summary>查看详情</summary><p>擅长经济政策分析。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="350"><img src="蒋泊远.jpg" alt="蒋泊远"/><h3>蒋泊远</h3><p>市场营销</p><details><summary>查看详情</summary><p>市场调研与传播。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="400"><img src="王宸.jpg" alt="王宸"/><h3>王宸</h3><p>地理信息科学</p><details><summary>查看详情</summary><p>GIS 应用分析。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
     </div>
   </section>
 
-  <section id="schedule" data-aos="fade-up">
-    <h2>进度安排</h2>
-    <div class="timeline">
-      <div class="timeline-item"><div class="timeline-content"><strong>2025.7.20–7.24</strong><p>前期准备（议题细化、问卷设计等）</p></div></div>
-      <div class="timeline-item"><div class="timeline-content"><strong>2025.7.25–7.31</strong><p>实地调研（问卷发放、访谈观察）</p></div></div>
-      <div class="timeline-item"><div class="timeline-content"><strong>2025.8.1–8.5</strong><p>数据整理与初步分析</p></div></div>
-      <div class="timeline-item"><div class="timeline-content"><strong>2025.8.6–8.11</strong><p>深度分析与成果撰写</p></div></div>
-      <div class="timeline-item"><div class="timeline-content"><strong>2025.8.12–8.15</strong><p>成果总结与展示</p></div></div>
+  <section id="timeline" data-aos="fade-up">
+    <h2>实践事记</h2>
+    <div class="tl">
+      <div class="tl-item open">
+        <strong>进度安排</strong>
+        <span class="tl-hint">点击可收起</span>
+        <div class="tl-detail">
+          <ul>
+            <li>7.20–7.24：前期准备（议题细化、问卷设计）</li>
+            <li>7.25–7.31：实地调研（问卷发放、访谈观察）</li>
+            <li>8.1–8.5：数据整理与初步分析</li>
+            <li>8.6–8.11：深度分析与成果撰写</li>
+            <li>8.12–8.15：成果总结与展示</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <strong>成果展示</strong>
+        <span class="tl-hint">点击展开</span>
+        <div class="tl-detail">
+          <ul>
+            <li>300+ 有效问卷 & 20+ 深度访谈</li>
+            <li>AI 差异分析报告与政策建议</li>
+            <li>3 篇科普文稿 & 1 条短视频</li>
+            <li>图文 & 视频展示与分享</li>
+            <li>
+              <a href="成果简报.pdf" target="_blank" style="color:var(--main-blue);font-weight:600;text-decoration:underline;"><i class="fas fa-download"></i> 下载成果简报</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <strong>实践风采</strong>
+        <span class="tl-hint">点击展开</span>
+        <div class="tl-detail">
+          <div class="gallery">
+            <a href="photo1_large.jpg" class="glightbox gallery-item"><img src="photo1_thumb.jpg" alt="调研现场1"/></a>
+            <a href="photo2_large.jpg" class="glightbox gallery-item"><img src="photo2_thumb.jpg" alt="调研现场2"/></a>
+            <a href="photo3_large.jpg" class="glightbox gallery-item"><img src="photo3_thumb.jpg" alt="团队合影"/></a>
+            <a href="photo4_large.jpg" class="glightbox gallery-item"><img src="photo4_thumb.jpg" alt="与村民交流"/></a>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <strong>实践日记</strong>
+        <span class="tl-hint">点击展开</span>
+        <div class="tl-detail">
+          <div class="diary-entry"><h4>2025-07-20</h4><p>前期准备，细化议题并测试问卷。</p></div>
+          <div class="diary-entry"><h4>2025-07-21</h4><p>走访村委会，与当地负责人沟通调研计划。</p></div>
+          <div class="diary-entry"><h4>2025-07-22</h4><p>开展问卷发放与深度访谈。</p></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <strong>调研地点</strong>
+        <span class="tl-hint">点击展开</span>
+        <div class="tl-detail">
+          <div id="timeline-map"></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="outcomes" data-aos="fade-up">
-    <h2>成果展示</h2>
-    <div class="outcome-cards">
-      <div class="outcome-card" data-aos="zoom-in"><i class="fas fa-file-alt"></i><p>300+ 有效问卷 &amp; 20+ 深度访谈</p></div>
-      <div class="outcome-card" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-chart-line"></i><p>AI 差异分析调研报告与政策建议</p></div>
-      <div class="outcome-card" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-pen-nib"></i><p>3 篇科普文稿 &amp; 1 条短视频</p></div>
-      <div class="outcome-card" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-share-alt"></i><p>图文 &amp; 视频展示与分享</p></div>
+  <section id="resources" data-aos="fade-up">
+    <h2>资源宝库</h2>
+    <div class="filter-bar">
+      <button class="active" data-type="all">全部</button>
+      <button data-type="article">文章</button>
+      <button data-type="video">视频</button>
+      <button data-type="applet">小程序</button>
     </div>
-  </section>
-
-  <section id="gallery" data-aos="fade-up">
-    <h2>实践风采相册</h2>
-    <div class="gallery">
-      <a href="photo1_large.jpg" class="glightbox gallery-item"><img src="photo1_thumb.jpg" alt="调研现场1" /></a>
-      <a href="photo2_large.jpg" class="glightbox gallery-item"><img src="photo2_thumb.jpg" alt="调研现场2" /></a>
-      <a href="photo3_large.jpg" class="glightbox gallery-item"><img src="photo3_thumb.jpg" alt="团队合影" /></a>
-      <a href="photo4_large.jpg" class="glightbox gallery-item"><img src="photo4_thumb.jpg" alt="与村民交流" /></a>
+    <div class="cards">
+      <div class="card" data-type="article" data-link="https://www.example.com/ai-intro">
+        <img src="https://via.placeholder.com/150x90" alt="AI入门"/>
+        <p>AI 入门教程</p><small>文章</small>
+      </div>
+      <div class="card" data-type="video" data-link="https://www.example.com/video">
+        <img src="https://via.placeholder.com/150x90" alt="纪录片"/>
+        <p>乡村调研纪录片</p><small>视频</small>
+      </div>
+      <div class="card" data-type="applet" data-link="https://www.wjx.cn/vm/wpxJuZP.aspx#">
+        <img src="https://via.placeholder.com/150x90" alt="小程序"/>
+        <p>问卷星小程序</p><small>小程序</small>
+      </div>
+      <div class="card" data-type="article" data-link="https://www.example.com/ai-agriculture">
+        <img src="https://via.placeholder.com/150x90" alt="报告"/>
+        <p>智慧农业报告</p><small>文章</small>
+      </div>
+      <div class="card" data-type="video" data-link="https://www.example.com/drone">
+        <img src="https://via.placeholder.com/150x90" alt="无人机"/>
+        <p>无人机巡田视频</p><small>视频</small>
+      </div>
+      <div class="card" data-type="applet" data-link="https://www.example.com/app">
+        <img src="https://via.placeholder.com/150x90" alt="监测"/>
+        <p>环境监测小程序</p><small>小程序</small>
+      </div>
     </div>
-  </section>
-
-  <section id="diary" data-aos="fade-up">
-    <h2>实践日记</h2>
-    <div class="diary-entry"><h4>2025-07-20</h4><p>开展前期准备，细化调研议题并测试问卷。</p></div>
-    <div class="diary-entry"><h4>2025-07-21</h4><p>走访村委会，与当地负责人沟通调研计划。</p></div>
-    <div class="diary-entry"><h4>2025-07-22</h4><p>开展问卷发放与深度访谈。</p></div>
-  </section>
-
-  <section id="map" data-aos="fade-up">
-    <h2>调研地点地图</h2>
-    <div id="map"></div>
   </section>
 
   <section id="survey" class="survey-section" data-aos="fade-up">
@@ -369,75 +552,157 @@
     </div>
   </section>
 
-  <section id="feedback" data-aos="fade-up">
-    <h2>反馈</h2>
-    <form class="feedback-form" action="mailto:zs@nwafu.edu.cn" method="post" enctype="text/plain">
-      <label>您的邮箱：
-        <input type="email" name="email" required placeholder="example@domain.com" />
-      </label>
-      <label>反馈内容：
-        <textarea name="message" required placeholder="请输入您的建议或问题…"></textarea>
-      </label>
-      <button type="submit"><i class="fas fa-paper-plane"></i> 发送反馈</button>
-    </form>
-  </section>
+<!-- 联系方式模块并排版 -->
+<div style="background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); padding: 36px 40px; margin: 0 0 36px 0;">
+  <h2 style="color: #004c97; font-size: 2.3rem; margin-bottom: 28px; font-family: 'Roboto Slab', serif; border-bottom: none;">联系方式</h2>
+  <div style="border-top: 4px solid #004c97; width: 90px; margin: -22px 0 24px 0;"></div>
+  <div style="display: flex; flex-wrap: wrap; gap: 80px; font-size: 1.18rem;">
+    <!-- 张舜 -->
+    <div>
+      <div style="margin-bottom: 14px;"><strong>负责人：</strong>张舜</div>
+      <div style="margin-bottom: 14px;"><strong>联系电话：</strong>19502913998</div>
+      <div style="margin-bottom: 8px;"><strong>联系邮箱：</strong>zs@nwafu.edu.cn</div>
+    </div>
+    <!-- 赵雅琪 -->
+    <div>
+      <div style="margin-bottom: 14px;"><strong>负责人：</strong>赵雅琪</div>
+      <div style="margin-bottom: 14px;"><strong>联系电话：</strong>15379786367</div>
+      <div style="margin-bottom: 8px;"><strong>联系邮箱：</strong>2023014527@nwafu.edu.cn</div>
+    </div>
+  </div>
+</div>
 
-  <section id="partners" data-aos="fade-up">
-    <h2>合作机构</h2>
-    <div class="partners">
-      <div class="partner">
-        <img src="西农校徽.jpg" alt="西北农林科技大学" />
-        <p>西北农林科技大学</p>
-      </div>
-      <div class="partner">
-        <img src="信工院徽.png" alt="信息工程学院" />
-        <p>信息工程学院</p>
-      </div>
-      <div class="partner">
-        <img src="共青团张掖市委员会 .png" alt="共青团张掖市委员会" />
-        <p>共青团张掖市委员会</p>
-      </div>
-      <div class="partner">
-        <img src="共青团高台县委员会.png" alt="高台县共青团委员会" />
-        <p>高台县共青团委员会</p>
+
+
+<!-- 合作机构模块 开始 -->
+<div style="background: #f7fafc;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 42px 0 0 0; display: flex; flex-direction: column; gap: 32px;">
+    <!-- 合作机构卡片 -->
+    <div style="background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); padding: 36px 40px; margin: 0 0 36px 0;">
+      <h2 style="color: #004c97; font-size: 2.3rem; margin-bottom: 8px; font-family: 'Roboto Slab', serif;">合作机构</h2>
+      <div style="height: 5px; width: 70px; margin: 10px auto 36px auto; background: #f5a623; border-radius: 2px;"></div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 54px;">
+        <div style="text-align: center;">
+          <img src="西农校徽.jpg" alt="西北农林科技大学" style="height: 64px; margin-bottom: 10px;" />
+          <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 600;">西北农林科技大学</div>
+        </div>
+        <div style="text-align: center;">
+          <img src="信工院徽.png" alt="信息工程学院" style="height: 64px; margin-bottom: 10px;" />
+          <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 600;">信息工程学院</div>
+        </div>
+        <div style="text-align: center;">
+          <img src="共青团张掖市委员会.png" alt="共青团张掖市委员会" style="height: 64px; margin-bottom: 10px;" />
+          <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 600;">共青团张掖市委员会</div>
+        </div>
+        <div style="text-align: center;">
+          <img src="共青团高台县委员会.png" alt="高台县共青团委员会" style="height: 64px; margin-bottom: 10px;" />
+          <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 600;">高台县共青团委员会</div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
+<!-- 合作机构模块 结束 -->
 
-  <footer data-aos="fade-up">
-    <p>&copy; 2025 智享生活·智汇新风 实践调研团 版权所有</p>
-  </footer>
+<footer style="background: #004c97; color: #fff; text-align: center; padding: 20px 10px; font-size: 1.05rem;">
+  © 2025 智享生活·智汇新风 团队 版权所有
+</footer>
 
+
+  <!-- 回到顶部按钮 -->
+  <button id="backToTop" title="回到顶部"><i class="fas fa-arrow-up"></i></button>
   <!-- 脚本 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js"></script>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
+    // 动画初始化
     AOS.init({ once: true });
     GLightbox({ selector: '.glightbox' });
 
-    // 地图初始化：甘肃省张掖市高台县
-    var map = L.map('map').setView([38.9758, 100.4453], 10);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-    L.marker([38.9758, 100.4453]).addTo(map).bindPopup('甘肃省张掖市高台县');
+    // 时间轴默认展开第1项并添加提示
+    document.querySelectorAll('.tl-item').forEach((item, idx) => {
+      if (idx === 0) item.classList.add('open');
+    });
 
-    // JSONP 实时获取问卷星当前参与人数
+    // Timeline toggle & map init
+    let mapInited = false;
+    document.querySelectorAll('.tl-item').forEach(item => {
+      item.addEventListener('click', function(e){
+        // 阻止点击内容里的a跳转折叠
+        if (e.target.tagName.toLowerCase() === 'a') return;
+        // 展开收起
+        this.classList.toggle('open');
+        // 改变提示内容
+        let hint = this.querySelector('.tl-hint');
+        if (hint) hint.innerText = this.classList.contains('open') ? '点击可收起' : '点击展开';
+        // 地图
+        if (this.textContent.includes('调研地点') && !mapInited) {
+          const map = L.map('timeline-map').setView([38.9758,100.4453], 10);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+          }).addTo(map);
+          L.marker([38.9758,100.4453]).addTo(map).bindPopup('甘肃省 张掖市 高台县');
+          mapInited = true;
+        }
+      });
+    });
+
+    // 问卷人数统计
     function setCount(c) {
-      var el = document.getElementById('survey-count');
+      const el = document.getElementById('survey-count');
       if (el) el.innerText = c + ' 人';
     }
     (function(){
-      var surveyID = 'wpxJuZP';
-      var callback = 'setCount';
-      var url = 'https://www.wjx.cn/wjx/join/NewCount.aspx'
-              + '?surveyID=' + surveyID
-              + '&callback=' + callback;
-      var s = document.createElement('script');
-      s.src = url; s.async = true;
-      document.body.appendChild(s);
+      const s = document.createElement('script');
+      s.src = 'https://www.wjx.cn/wjx/join/NewCount.aspx?surveyID=wpxJuZP&callback=setCount';
+      s.async = true; document.body.appendChild(s);
     })();
+
+    // 资源卡片过滤
+    document.querySelectorAll('#resources .filter-bar button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#resources .filter-bar button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const type = btn.dataset.type;
+        document.querySelectorAll('#resources .card').forEach(card => {
+          card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
+        });
+      });
+    });
+    // 资源卡片可点击跳转
+    document.querySelectorAll('#resources .card[data-link]').forEach(card => {
+      card.addEventListener('click', function(){
+        const url = this.dataset.link;
+        if(url) window.open(url, '_blank');
+      });
+      card.style.cursor = 'pointer';
+    });
+
+    // 回到顶部按钮
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 350){
+        backToTop.style.display = 'flex';
+      }else{
+        backToTop.style.display = 'none';
+      }
+    });
+    backToTop.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // 导航高亮（ScrollSpy）
+    const navLinks = document.querySelectorAll('#mainNav a');
+    const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
+    window.addEventListener('scroll', function(){
+      let index = sections.findIndex((sec,i)=> sec.getBoundingClientRect().top - 90 > 0 );
+      if(index === -1) index = sections.length-1;
+      else index = Math.max(0, index-1);
+      navLinks.forEach(l=>l.classList.remove('active'));
+      navLinks[index].classList.add('active');
+    });
+
   </script>
   <noscript>请启用 JavaScript 以获得更好体验。</noscript>
 </body>

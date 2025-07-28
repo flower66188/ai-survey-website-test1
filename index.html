@@ -1,249 +1,230 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智享生活·智汇新风 | 社会实践</title>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --color-primary: #005ea5;
-            --color-secondary: #f5a623;
-            --color-bg: #f0f4f8;
-            --color-card: #ffffff;
-            --text-dark: #333333;
-            --text-light: #ffffff;
-            --text-muted: #616161;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'PT Sans', sans-serif; background: var(--color-bg); color: var(--text-dark); overflow-x: hidden; }
-        h1, h2, h3 { font-family: 'Roboto Slab', serif; color: var(--color-primary); }
-        a { color: var(--color-primary); text-decoration: none; }
-
-        header { background: var(--color-primary); color: var(--text-light); padding: 20px 0; position: sticky; top: 0; z-index: 10; }
-        .header-container { width: 90%; max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-        .logo-title h1 { font-size: 1.8rem; text-align: center; }
-        .logo-row img { height: 40px; margin: 5px; vertical-align: middle; max-width: 100%; }
-        nav ul { list-style: none; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        nav a { font-weight: bold; padding: 8px 12px; border-radius: 4px; transition: background .3s; }
-        nav a:hover { background: rgba(255,255,255,0.2); }
-
-        .hero { background: url('hero-bg.jpg') center/cover no-repeat, linear-gradient(135deg, rgba(0,94,165,0.8), rgba(245,166,35,0.8)); color: var(--text-light); text-align: center; padding: 100px 20px; }
-        .hero h2 { font-size: 2.5rem; margin-bottom: 10px; }
-        .hero p { font-size: 1.2rem; }
-
-        section { padding: 60px 0; }
-        .section-container { width: 85%; max-width: 1000px; margin: auto; }
-        section h2 { font-size: 2rem; margin-bottom: 30px; text-align: center; }
-
-        .cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 20px; }
-        .card { background: var(--color-card); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform .3s; }
-        .card:hover { transform: translateY(-8px); }
-        .card img { width: 100%; height: auto; object-fit: cover; max-width: 100%; }
-        .card-body { padding: 20px; text-align: center; }
-        .card-body h3 { margin-bottom: 8px; font-size: 1.2rem; }
-        .card-body p { font-size: 0.9rem; color: var(--text-muted); }
-
-        .timeline { position: relative; padding-left: 20px; }
-        .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 4px; background: var(--color-secondary); }
-        .timeline-item { position: relative; margin-bottom: 30px; padding-left: 40px; }
-        .timeline-item:last-child { margin-bottom: 0; }
-        .timeline-item::before { content: ''; position: absolute; left: 12px; top: 5px; width: 16px; height: 16px; background: var(--color-primary); border-radius: 50%; }
-        .timeline-item h3 { margin-bottom: 5px; font-size: 1.1rem; color: var(--color-primary); }
-        .timeline-item p { font-size: 0.9rem; color: var(--text-muted); }
-
-        ul.custom-list { list-style: none; padding-left: 0; }
-        ul.custom-list li { position: relative; padding-left: 25px; margin-bottom: 12px; }
-        ul.custom-list li::before { content: '\2713'; position: absolute; left: 0; color: var(--color-secondary); }
-
-        .contact-form { max-width: 500px; margin: auto; background: var(--color-card); padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .contact-form label { display: block; margin-bottom: 6px; font-weight: bold; }
-        .contact-form input, .contact-form textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 15px; }
-        .contact-form button { width: 100%; padding: 12px; background: var(--color-secondary); border: none; color: #fff; font-size: 1rem; border-radius: 4px; cursor: pointer; transition: background .3s; }
-        .contact-form button:hover { background: var(--color-primary); }
-
-        footer { background: var(--color-primary); color: var(--text-light); text-align: center; padding: 20px 0; margin-top: 40px; }
-
-        .survey-button {
-            display: inline-block;
-            background-color: var(--color-secondary);
-            color: #fff;
-            font-weight: bold;
-            padding: 12px 24px;
-            border-radius: 6px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .survey-button:hover {
-            background-color: var(--color-primary);
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .header-container,
-            .section-container {
-                width: 95%;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .logo-row {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                margin-top: 10px;
-            }
-
-            .logo-row img {
-                height: 30px;
-                margin: 5px;
-            }
-
-            nav ul.nav-links {
-                flex-direction: column;
-                gap: 10px;
-                align-items: center;
-            }
-
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .timeline-item {
-                padding-left: 30px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .index-nav .section-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>智享生活·智汇新风 | 社会实践</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: #005ea5;
+      --color-secondary: #f5a623;
+      --color-bg: #f0f4f8;
+      --color-card: #ffffff;
+      --text-dark: #333;
+      --text-light: #fff;
+      --text-muted: #616161;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'PT Sans', sans-serif;
+      background: var(--color-bg);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Roboto Slab', serif;
+    }
+    header {
+      background: var(--color-primary);
+      color: var(--text-light);
+      padding: 10px;
+      text-align: center;
+    }
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 10px 0;
+      gap: 10px;
+    }
+    .logo-row img {
+      height: 30px;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      background: var(--color-card);
+      padding: 10px 0;
+      font-size: 0.9rem;
+    }
+    nav a {
+      color: var(--color-primary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(0, 94, 165, 0.9), rgba(245, 166, 35, 0.9));
+      color: var(--text-light);
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .hero h2 {
+      font-size: 1.6rem;
+    }
+    .hero p {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    section {
+      padding: 30px 20px;
+      max-width: 960px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--color-primary);
+    }
+    p, li {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .card {
+      background: var(--color-card);
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      padding: 10px;
+    }
+    .card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+    .card h3 {
+      font-size: 1rem;
+      margin: 10px 0 5px;
+    }
+    .card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer {
+      background: var(--color-primary);
+      color: var(--text-light);
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+    .survey-button {
+      background: var(--color-secondary);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .survey-button:hover {
+      background: var(--color-primary);
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo-title"><h1>智享生活·智汇新风</h1></div>
-            <div class="logo-row">
-                <img src="高台县县徽.png" alt="高台县人民政府">
-                <img src="西农校徽.jpg" alt="西北农林科技大学">
-                <img src="信工院徽.png" alt="信息工程学院">
-            </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#about">关于项目</a></li>
-                    <li><a href="#team">团队成员</a></li>
-                    <li><a href="#schedule">进度安排</a></li>
-                    <li><a href="#outcomes">成果展示</a></li>
-                    <li><a href="#survey">问卷调查</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <header>
+    <h1>智享生活·智汇新风</h1>
+    <div class="logo-row">
+      <img src="高台县县徽.png" alt="高台县人民政府" />
+      <img src="西农校徽.jpg" alt="西北农林科技大学" />
+      <img src="信工院徽.png" alt="信息工程学院" />
+    </div>
+  </header>
+  <nav>
+    <a href="#about">关于项目</a>
+    <a href="#team">团队成员</a>
+    <a href="#schedule">进度安排</a>
+    <a href="#outcomes">成果展示</a>
+    <a href="#survey">问卷调查</a>
+  </nav>
+  <section class="hero">
+    <h2>探索乡村 AI 认知</h2>
+    <p>共塑智慧基层服务新未来</p>
+  </section>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h2>探索乡村 AI 认知</h2>
-            <p>共塑智慧基层服务新未来</p>
-        </div>
-    </section>
-    <nav class="index-nav">
-        <div class="section-container">
-            <a href="#about">关于项目</a>
-            <a href="#team">团队成员</a>
-            <a href="#schedule">进度安排</a>
-            <a href="#outcomes">成果展示</a>
-            <a href="#survey">问卷调查</a>
-        </div>
-    </nav>
-    <section id="about">
-        <div class="section-container">
-            <h2>关于项目</h2>
-            <p>为贯彻“数字中国”“智慧社会”战略，西北农林科技大学信息工程学院组建“智享生活·智汇新风”调研团，拟于2025年7月20日至8月15日在甘肃张掖高台县开展基层 AI 认知调研。</p>
-            <h3>项目意义</h3>
-            <ul class="custom-list">
-                <li>响应智慧乡村建设，促进数字化转型</li>
-                <li>为政策与产品优化提供实证依据</li>
-                <li>锻炼团队创新与社会责任</li>
-            </ul>
-            <h3>调研目标</h3>
-            <ul class="custom-list">
-                <li>评估社区、医疗与金融的 AI 认知与接受度</li>
-                <li>收集 300+ 问卷与 20+ 访谈典型案例</li>
-                <li>分析不同群体的认知差异与需求</li>
-                <li>识别推广障碍，提出优化策略</li>
-            </ul>
-        </div>
-    </section>
+  <section id="about">
+    <h2>关于项目</h2>
+    <p>为贯彻“数字中国”“智慧社会”战略，西北农林科技大学信息工程学院组建“智享生活·智汇新风”调研团，拟于2025年7月20日至8月15日在甘肃张掖高台县开展基层 AI 认知调研。</p>
+  </section>
 
-    <section id="team">
-        <div class="section-container">
-            <h2>团队成员</h2>
-            <div class="cards">
-                <div class="card"><img src="牟铨波.jpg" alt="牟铨波"><div class="card-body"><h3>牟铨波</h3><p>带队老师 | 西北农林科技大学 信息工程学院</p></div></div>
-                <div class="card"><img src="李培铨.jpg" alt="李培铨"><div class="card-body"><h3>李培铨</h3><p>指导老师 | 西北农林科技大学 信息工程学院</p></div></div>
-                <div class="card"><img src="张舜.jpg" alt="张舜"><div class="card-body"><h3>张舜</h3><p>队长 | 信息工程学院 计算机科学与技术</p></div></div>
-                <div class="card"><img src="赵雅琪.jpg" alt="赵雅琪"><div class="card-body"><h3>赵雅琪</h3><p>副队长 | 理学院 信息与计算科学</p></div></div>
-                <div class="card"><img src="蒋泊远.jpg" alt="蒋泊远"><div class="card-body"><h3>蒋泊远</h3><p>经济管理学院 市场营销</p></div></div>
-                <div class="card"><img src="李菲.jpg" alt="李菲"><div class="card-body"><h3>李菲</h3><p>信息工程学院 计算机科学与技术</p></div></div>
-                <div class="card"><img src="李佳乐.jpg" alt="李佳乐"><div class="card-body"><h3>李佳乐</h3><p>信息工程学院 计算机科学与技术</p></div></div>
-                <div class="card"><img src="梅欣雨.jpg" alt="梅欣雨"><div class="card-body"><h3>梅欣雨</h3><p>信息工程学院 数据科学与大数据技术</p></div></div>
-                <div class="card"><img src="宋冰艳.jpg" alt="宋冰艳"><div class="card-body"><h3>宋冰艳</h3><p>信息工程学院 计算机科学与技术</p></div></div>
-                <div class="card"><img src="王宸.jpg" alt="王宸"><div class="card-body"><h3>王宸</h3><p>资源环境学院 地理信息科学</p></div></div>
-                <div class="card"><img src="王玟.jpg" alt="王玟"><div class="card-body"><h3>王玟</h3><p>食品科学与工程学院 食品质量与安全</p></div></div>
-                <div class="card"><img src="殷璐.jpg" alt="殷璐"><div class="card-body"><h3>殷璐</h3><p>水土保持科学与工程学院 水土保持与荒漠化防治</p></div></div>
-                <div class="card"><img src="张蕊.jpg" alt="张蕊"><div class="card-body"><h3>张蕊</h3><p>经济管理学院 金融学</p></div></div>
-            </div>
-        </div>
-    </section>
+  <section id="team">
+    <h2>团队成员</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="牟铨波.jpg" alt="牟铨波">
+        <h3>牟铨波</h3>
+        <p>带队老师 | 信息工程学院</p>
+      </div>
+      <div class="card">
+        <img src="李培铨.jpg" alt="李培铨">
+        <h3>李培铨</h3>
+        <p>指导老师 | 信息工程学院</p>
+      </div>
+      <div class="card">
+        <img src="张舜.jpg" alt="张舜">
+        <h3>张舜</h3>
+        <p>队长 | 计算机科学与技术</p>
+      </div>
+      <div class="card">
+        <img src="赵雅琪.jpg" alt="赵雅琪">
+        <h3>赵雅琪</h3>
+        <p>副队长 | 信息与计算科学</p>
+      </div>
+      <!-- 可添加更多成员卡片 -->
+    </div>
+  </section>
 
-    <section id="schedule">
-        <div class="section-container">
-            <h2>进度安排</h2>
-            <div class="timeline">
-                <div class="timeline-item"><h3>7.20–7.24</h3><p>前期准备：议题细化、问卷设计、联络场所</p></div>
-                <div class="timeline-item"><h3>7.25–7.31</h3><p>实地调研：问卷发放、访谈观察</p></div>
-                <div class="timeline-item"><h3>8.1–8.5</h3><p>数据整理与初步分析</p></div>
-                <div class="timeline-item"><h3>8.6–8.11</h3><p>深度分析与成果撰写</p></div>
-                <div class="timeline-item"><h3>8.12–8.15</h3><p>成果总结与展示</p></div>
-            </div>
-        </div>
-    </section>
+  <section id="schedule">
+    <h2>进度安排</h2>
+    <ul>
+      <li>7.20–7.24：前期准备（议题细化、问卷设计等）</li>
+      <li>7.25–7.31：实地调研（问卷发放、访谈观察）</li>
+      <li>8.1–8.5：数据整理与初步分析</li>
+      <li>8.6–8.11：深度分析与成果撰写</li>
+      <li>8.12–8.15：成果总结与展示</li>
+    </ul>
+  </section>
 
-    <section id="outcomes">
-        <div class="section-container">
-            <h2>成果展示</h2>
-            <ul class="custom-list">
-                <li>300+ 有效问卷 &amp; 20+ 深度访谈</li>
-                <li>AI 认知差异调研报告与政策建议</li>
-                <li>3 篇科普文稿 &amp; 1 条短视频</li>
-                <li>图文 &amp; 视频展示与分享</li>
-            </ul>
-        </div>
-    </section>
+  <section id="outcomes">
+    <h2>成果展示</h2>
+    <ul>
+      <li>300+ 有效问卷 & 20+ 深度访谈</li>
+      <li>AI 差异分析调研报告与政策建议</li>
+      <li>3 篇科普文稿 & 1 条短视频</li>
+      <li>图文 & 视频展示与分享</li>
+    </ul>
+  </section>
 
-    <section id="survey">
-        <div class="section-container">
-            <h2>问卷调查</h2>
-            <div style="background: var(--color-card); padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; max-width: 600px; margin: 0 auto;">
-                <p style="font-size: 1rem; color: var(--text-dark); margin-bottom: 20px;">请点击下方按钮参与问卷调查，帮助我们收集宝贵数据：</p>
-                <a href="https://www.wjx.cn/vm/wpxJuZP.aspx#" target="_blank" rel="noopener noreferrer" class="survey-button">填写问卷</a>
-            </div>
-        </div>
-    </section>
+  <section id="survey">
+    <h2>问卷调查</h2>
+    <p>请点击下方按钮参与问卷：</p>
+    <a href="https://www.wjx.cn/vm/wpxJuZP.aspx#" class="survey-button" target="_blank">填写问卷</a>
+  </section>
 
-    <footer>
-        <div class="section-container">
-            <p>&copy; 2025 智享生活·智汇新风 团队 版权所有</p>
-        </div>
-    </footer>
+  <footer>
+    <p>&copy; 2025 智享生活·智汇新风 团队 版权所有</p>
+  </footer>
 </body>
 </html>

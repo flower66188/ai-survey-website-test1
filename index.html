@@ -4,28 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>智享生活·智汇新风 | 社会实践</title>
-  <!-- SEO 元信息 -->
-  <meta name="description" content="智享生活·智汇新风社会实践项目，探索乡村 AI 认知，分享调研成果与日记。">
-  <meta name="keywords" content="社会实践, AI认知, 乡村调研, 西北农林科技大学, 智享生活">
-  <!-- Favicon -->
+  <!-- SEO -->
+  <meta name="description" content="智享生活·智汇新风社会实践项目，探索乡村 AI 认知，分享调研成果与日记。" />
+  <meta name="keywords" content="社会实践, AI认知, 乡村调研, 西北农林科技大学, 智享生活" />
   <link rel="icon" href="favicon.ico" />
+
   <!-- 社交预览 -->
   <meta property="og:title" content="智享生活·智汇新风 | 社会实践" />
   <meta property="og:description" content="探索乡村 AI 认知，共塑智慧基层服务新未来。" />
   <meta property="og:image" content="share-image.png" />
   <meta property="og:type" content="website" />
 
-  <!-- 字体与图标 -->
+  <!-- 字体 & 图标 & 动画 & 相册 & 地图 -->
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- 动画库 AOS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-
-  <!-- 相册 Lightbox (GLightbox) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" />
-
-  <!-- 地图 Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
   <style>
@@ -38,27 +32,23 @@
       --text-light: #fff;
       --text-muted: #616161;
     }
-    * { box-sizing: border-box; margin:0; padding:0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'PT Sans', sans-serif;
       background: var(--color-bg);
       color: var(--text-dark);
       scroll-behavior: smooth;
     }
-    h1,h2,h3 { font-family: 'Roboto Slab', serif; }
+    h1, h2, h3 { font-family: 'Roboto Slab', serif; }
     header {
       background: var(--color-primary);
       color: var(--text-light);
-      padding: 10px; text-align: center;
+      padding: 20px;
+      text-align: center;
     }
-    .logo-row {
-      display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 5px;
-    }
-    .logo-row img { height:30px; }
-
     nav {
       background: var(--color-card);
-      display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
       padding: 10px 0; font-size: .9rem;
     }
     nav a {
@@ -67,184 +57,194 @@
       transition: background .3s;
     }
     nav a:hover {
-      background: var(--color-primary); color: #fff;
+      background: var(--color-primary); color: var(--text-light);
     }
     nav a .fas { margin-right: 5px; }
 
     .hero {
       background: linear-gradient(135deg, rgba(0,94,165,0.9), rgba(245,166,35,0.9));
-      color: var(--text-light); text-align: center; padding:50px 20px;
+      color: var(--text-light); text-align: center; padding: 50px 20px;
     }
-    .hero h2 { font-size:1.6rem; }
-    .hero p { margin-top:10px; }
+    .hero h2 { font-size: 1.6rem; }
+    .hero p { margin-top: 10px; }
 
     section {
-      max-width: 960px; margin: auto; padding:30px 20px;
+      max-width: 960px; margin: auto; padding: 30px 20px;
     }
     section h2 {
-      text-align:center; color: var(--color-primary);
-      margin-bottom:20px; font-size:1.5rem;
+      text-align: center; color: var(--color-primary);
+      margin-bottom: 20px; font-size: 1.5rem;
     }
-    p, li { line-height:1.6; font-size:.95rem; }
+    p, li { line-height: 1.6; font-size: .95rem; }
 
+    .team-group-title {
+      font-size: 1.2rem; color: var(--text-dark);
+      margin: 30px 0 10px; border-left: 5px solid var(--color-primary);
+      padding-left: 10px;
+    }
     .cards {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
-      gap:15px; margin-top:10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+      gap: 15px; margin-top: 10px;
     }
     .card {
-      background: var(--color-card);
-      border-radius:8px;
-      box-shadow:0 1px 3px rgba(0,0,0,.05);
-      overflow:hidden; text-align:center; padding:10px;
+      background: var(--color-card); border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
+      text-align: center; padding: 10px;
     }
     .card img {
-      width:100%; height:120px; object-fit:cover;
+      width: 100%; height: 120px; object-fit: cover;
     }
-    .card h3 { margin:10px 0 5px; font-size:1rem; }
-    .card p { font-size:.85rem; color:var(--text-muted); }
+    .card h3 { margin: 10px 0 5px; font-size: 1rem; }
+    .card p { font-size: .85rem; color: var(--text-muted); }
     .card details summary {
-      cursor:pointer; margin-top:5px;
-      font-size:.85rem; color:var(--color-secondary);
+      cursor: pointer; margin-top: 5px;
+      font-size: .85rem; color: var(--color-secondary);
     }
     .card details[open] p {
-      margin-top:5px; font-size:.85rem; color:var(--text-muted);
+      margin-top: 5px; font-size: .85rem; color: var(--text-muted);
     }
 
-    /* 时间轴 */
     .timeline {
-      position: relative; padding:20px 0; margin:20px 0;
+      position: relative; padding: 20px 0; margin: 20px 0;
     }
     .timeline::before {
-      content:''; position:absolute; left:50%; top:0; bottom:0;
-      width:2px; background:var(--color-primary);
+      content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 2px; background: var(--color-primary);
     }
     .timeline-item {
-      position:relative; width:50%; padding:10px 20px;
+      position: relative; width: 50%; padding: 10px 20px;
     }
-    .timeline-item:nth-child(odd) { left:0; }
-    .timeline-item:nth-child(even) { left:50%; }
+    .timeline-item:nth-child(odd) { left: 0; }
+    .timeline-item:nth-child(even) { left: 50%; }
     .timeline-item::before {
-      content:''; position:absolute; top:15px;
-      width:10px; height:10px; border-radius:50%;
-      background:var(--color-secondary);
-      border:3px solid var(--color-card);
+      content: ''; position: absolute; top: 15px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--color-secondary);
+      border: 3px solid var(--color-card);
     }
-    .timeline-item:nth-child(odd)::before { right:-6px; }
-    .timeline-item:nth-child(even)::before { left:-6px; }
+    .timeline-item:nth-child(odd)::before { right: -6px; }
+    .timeline-item:nth-child(even)::before { left: -6px; }
     .timeline-content {
-      background:var(--color-card); padding:10px;
-      border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,.1);
+      background: var(--color-card); padding: 10px;
+      border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
     }
-    .timeline-item:nth-child(odd) .timeline-content { text-align:right; }
+    .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
 
-    /* 成果展示卡片 */
     .outcome-cards {
-      display:grid;
+      display: grid;
       grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-      gap:15px; margin-top:20px;
+      gap: 15px; margin-top: 20px;
     }
     .outcome-card {
-      background:var(--color-card); padding:15px;
-      border-radius:8px; text-align:center;
-      box-shadow:0 1px 3px rgba(0,0,0,.05);
+      background: var(--color-card); padding: 15px;
+      border-radius: 8px; text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
     }
     .outcome-card .fas {
-      font-size:2rem; margin-bottom:10px; color:var(--color-primary);
-    }
-    .outcome-card p {
-      margin-top:5px; font-size:.9rem; color:var(--text-dark);
+      font-size: 2rem; margin-bottom: 10px;
+      color: var(--color-primary);
     }
 
-    /* 相册 */
     .gallery {
-      display:grid;
+      display: grid;
       grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-      gap:10px; margin-top:20px;
+      gap: 10px; margin-top: 20px;
     }
     .gallery-item img {
-      width:100%; height:120px; object-fit:cover;
-      border-radius:6px; cursor:pointer;
+      width: 100%; height: 120px; object-fit: cover;
+      border-radius: 6px; cursor: pointer;
     }
 
-    /* 实践日记 */
-    .diary-entry {
-      margin-bottom:20px;
-    }
+    .diary-entry { margin-bottom: 20px; }
     .diary-entry h4 {
-      font-size:1.1rem; margin-bottom:5px; color:var(--color-primary);
+      font-size: 1.1rem; margin-bottom: 5px; color: var(--color-primary);
     }
-    .diary-entry p { font-size:.93rem; color:var(--text-dark); }
 
-    /* 地图 */
     #map {
-      width:100%; height:300px; border-radius:8px; margin-top:10px;
+      width: 100%; height: 300px; border-radius: 8px; margin-top: 10px;
     }
 
-    /* 问卷卡片 */
-    .survey-section {
-      text-align:center;
-    }
+    .survey-section { text-align: center; }
     .survey-card {
-      display:inline-block; background:var(--color-card);
-      padding:20px; border-radius:8px;
-      box-shadow:0 1px 3px rgba(0,0,0,.1);
-      margin-top:15px;
+      display: inline-block; background: var(--color-card);
+      padding: 20px; border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      margin-top: 15px;
     }
-    .survey-card .fas {
-      font-size:1.5rem; color:var(--color-secondary); margin-bottom:10px;
-    }
-    .survey-card p { margin:5px 0; }
+    .survey-card .fas { font-size: 1.5rem; color: var(--color-secondary); }
+    .survey-card p { margin: 5px 0; }
     .survey-card a {
-      display:inline-block; margin-top:10px;
-      background:var(--color-secondary); color:#fff;
-      padding:10px 20px; border-radius:5px;
-      text-decoration:none; font-weight:bold;
+      display: inline-block; margin-top: 10px;
+      background: var(--color-secondary); color: #fff;
+      padding: 10px 20px; border-radius: 5px;
+      text-decoration: none; font-weight: bold;
     }
-    .survey-card a:hover {
-      background:var(--color-primary);
+    .survey-card a:hover { background: var(--color-primary); }
+
+    .feedback-form {
+      max-width: 600px; margin: auto;
+      padding: 20px; background: var(--color-card);
+      border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    }
+    .feedback-form label {
+      display: block; margin-bottom: 10px; font-size: .95rem;
+    }
+    .feedback-form input, .feedback-form textarea {
+      width: 100%; padding: 8px; border: 1px solid #ccc;
+      border-radius: 4px; font-size: .95rem;
+    }
+    .feedback-form textarea { height: 100px; resize: vertical; }
+
+    .feedback-form button {
+      margin-top: 10px; padding: 10px 20px;
+      background: var(--color-secondary); color: #fff;
+      border: none; border-radius: 5px; cursor: pointer;
+      font-size: 1rem;
+    }
+    .feedback-form button:hover { background: var(--color-primary); }
+
+    /* 合作机构：静态居中 */
+    #partners {
+      text-align: center; padding: 30px 0;
+      background: var(--color-card);
+    }
+    .partners {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 40px;
+      margin-top: 10px;
+    }
+    .partner {
+      text-align: center;
+    }
+    .partner img {
+      height: 60px; display: block; margin: 0 auto 8px;
+    }
+    .partner p {
+      font-size: .9rem; color: var(--text-dark);
     }
 
-    /* 留言区 */
-    #comments { margin-top:20px; }
-
-    /* 合作机构滚动 */
-    .institutions {
-      overflow:hidden; margin:40px 0;
-    }
-    .logo-track {
-      display:flex; width:calc(200px * 10); /* 根据 logo 数量调整 */
-      animation: scroll 20s linear infinite;
-    }
-    .logo-track img {
-      height:50px; margin:0 20px;
-    }
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    footer {
+      background: var(--color-primary);
+      color: var(--text-light);
+      text-align: center;
+      padding: 20px 10px;
+      font-size: .9rem;
     }
 
-    /* 深色模式 */
     @media (prefers-color-scheme: dark) {
-      body { background:#121212; color:#eee; }
-      nav, .card, .outcome-card, .timeline-content, .survey-card, footer, section {
-        background:#1e1e1e; color:#ccc;
+      body { background: #121212; color: #eee; }
+      nav, section, .card, .outcome-card, .timeline-content,
+      .survey-card, .feedback-form, #partners, footer {
+        background: #1e1e1e; color: #ccc;
       }
-      .timeline::before { background:#888; }
-      .timeline-item::before { background:#f5a623; border-color:#1e1e1e; }
     }
   </style>
 </head>
 <body>
   <header data-aos="fade-down">
     <h1>智享生活·智汇新风</h1>
-    <div class="logo-row">
-      <img src="高台县县徽.png" alt="高台县人民政府" />
-      <img src="西农校徽.jpg" alt="西北农林科技大学" />
-      <img src="信工院徽.png" alt="信息工程学院" />
-    </div>
   </header>
-
   <nav data-aos="fade-down" data-aos-delay="100">
     <a href="#about"><i class="fas fa-info-circle"></i>关于项目</a>
     <a href="#team"><i class="fas fa-users"></i>团队成员</a>
@@ -254,7 +254,7 @@
     <a href="#diary"><i class="fas fa-book"></i>实践日记</a>
     <a href="#map"><i class="fas fa-map-marker-alt"></i>调研地点</a>
     <a href="#survey"><i class="fas fa-edit"></i>问卷调查</a>
-    <a href="#comments"><i class="fas fa-comments"></i>留言反馈</a>
+    <a href="#feedback"><i class="fas fa-envelope"></i>反馈</a>
   </nav>
 
   <section class="hero" data-aos="zoom-in">
@@ -272,87 +272,58 @@
 
     <h3 class="team-group-title">老师组</h3>
     <div class="cards">
-      <div class="card" data-aos="flip-left"><img src="李培铨.jpg" alt="李培铨">
-        <h3>李培铨</h3><p>指导老师 | 信息工程学院</p>
+      <div class="card" data-aos="flip-left">
+        <img src="李培铨.jpg" alt="李培铨" />
+        <h3>李培铨</h3>
+        <p>指导老师 | 信息工程学院</p>
         <details><summary>查看详情</summary><p>研究方向：智慧教育；联系方式：****</p></details>
       </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="100"><img src="牟铨波.jpg" alt="牟铨波">
-        <h3>牟铨波</h3><p>带队老师 | 信息工程学院</p>
+      <div class="card" data-aos="flip-left" data-aos-delay="100">
+        <img src="牟铨波.jpg" alt="牟铨波" />
+        <h3>牟铨波</h3>
+        <p>带队老师 | 信息工程学院</p>
         <details><summary>查看详情</summary><p>研究方向：农村信息化；联系方式：****</p></details>
       </div>
     </div>
 
     <h3 class="team-group-title">队长组</h3>
     <div class="cards">
-      <div class="card" data-aos="flip-left"><img src="张舜.jpg" alt="张舜">
-        <h3>张舜</h3><p>队长 | 计算机科学与技术</p>
+      <div class="card" data-aos="flip-left">
+        <img src="张舜.jpg" alt="张舜" />
+        <h3>张舜</h3>
+        <p>队长 | 计算机科学与技术</p>
         <details><summary>查看详情</summary><p>擅长数据分析与项目管理</p></details>
       </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="100"><img src="赵雅琪.jpg" alt="赵雅琪">
-        <h3>赵雅琪</h3><p>副队长 | 信息与计算科学</p>
+      <div class="card" data-aos="flip-left" data-aos-delay="100">
+        <img src="赵雅琪.jpg" alt="赵雅琪" />
+        <h3>赵雅琪</h3>
+        <p>副队长 | 信息与计算科学</p>
         <details><summary>查看详情</summary><p>擅长逻辑建模与调研执行</p></details>
       </div>
     </div>
 
     <h3 class="team-group-title">队员组</h3>
     <div class="cards">
-      <div class="card" data-aos="flip-left"><img src="李佳乐.jpg" alt="李佳乐">
-        <h3>李佳乐</h3><p>计算机科学与技术 | 信息工程学院</p>
-        <details><summary>查看详情</summary><p>熟悉前端开发</p></details>
-      </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="50"><img src="梅欣雨.jpg" alt="梅欣雨">
-        <h3>梅欣雨</h3><p>大数据技术 | 信息工程学院</p>
-        <details><summary>查看详情</summary><p>擅长数据挖掘</p></details>
-      </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="100"><img src="李菲.jpg" alt="李菲">
-        <h3>李菲</h3><p>计算机科学与技术 | 信息工程学院</p>
-        <details><summary>查看详情</summary><p>图像处理方向</p></details>
-      </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="150"><img src="宋冰艳.jpg" alt="宋冰艳">
-        <h3>宋冰艳</h3><p>计算机科学与技术 | 信息工程学院</p>
-        <details><summary>查看详情</summary><p>擅长调研与采访</p></details>
-      </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="200"><img src="王玟.jpg" alt="王玟">
-        <h3>王玟</h3><p>食品质量与安全 | 食品科学与工程学院</p>
-        <details><summary>查看详情</summary><p>注重食品与健康科普</p></details>
-      </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="250"><img src="殷璐.jpg" alt="殷璐">
-        <h3>殷璐</h3><p>水土保持与荒漠化防治 | 水保学院</p>
-        <details><summary>查看详情</summary><p>环境与生态方向</p></details>
-      </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="300"><img src="张蕊.jpg" alt="张蕊">
-        <h3>张蕊</h3><p>金融学 | 经济管理学院</p>
-        <details><summary>查看详情</summary><p>擅长经济政策分析</p></details>
-      </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="350"><img src="蒋泊远.jpg" alt="蒋泊远">
-        <h3>蒋泊远</h3><p>市场营销 | 经济管理学院</p>
-        <details><summary>查看详情</summary><p>市场调研与传播</p></details>
-      </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="400"><img src="王宸.jpg" alt="王宸">
-        <h3>王宸</h3><p>地理信息科学 | 资源环境学院</p>
-        <details><summary>查看详情</summary><p>GIS 应用分析</p></details>
-      </div>
+      <div class="card" data-aos="flip-left"><img src="李佳乐.jpg" alt="李佳乐" /><h3>李佳乐</h3><p>计算机科学与技术 | 信息工程学院</p><details><summary>查看详情</summary><p>熟悉前端开发。</p></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="50"><img src="梅欣雨.jpg" alt="梅欣雨" /><h3>梅欣雨</h3><p>大数据技术 | 信息工程学院</p><details><summary>查看详情</summary><p>擅长数据挖掘。</p></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="100"><img src="李菲.jpg" alt="李菲" /><h3>李菲</h3><p>计算机科学与技术 | 信息工程学院</p><details><summary>查看详情</summary><p>图像处理方向。</p></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="150"><img src="宋冰艳.jpg" alt="宋冰艳" /><h3>宋冰艳</h3><p>计算机科学与技术 | 信息工程学院</p><details><summary>查看详情</summary><p>擅长调研与采访。</p></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="200"><img src="王玟.jpg" alt="王玟" /><h3>王玟</h3><p>食品质量与安全 | 食品科学与工程学院</p><details><summary>查看详情</summary><p>注重食品科普。</p></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="250"><img src="殷璐.jpg" alt="殷璐" /><h3>殷璐</h3><p>水土保持与荒漠化防治 | 水保学院</p><details><summary>查看详情</summary><p>环境与生态方向。</p></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="300"><img src="张蕊.jpg" alt="张蕊" /><h3>张蕊</h3><p>金融学 | 经济管理学院</p><details><summary>查看详情</summary><p>擅长经济政策分析。</p></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="350"><img src="蒋泊远.jpg" alt="蒋泊远" /><h3>蒋泊远</h3><p>市场营销 | 经济管理学院</p><details><summary>查看详情</summary><p>市场调研与传播。</p></details></div>
+      <div class="card" data-aos="flip-left" data-aos-delay="400"><img src="王宸.jpg" alt="王宸" /><h3>王宸</h3><p>地理信息科学 | 资源环境学院</p><details><summary>查看详情</summary><p>GIS 应用分析。</p></details></div>
     </div>
   </section>
 
   <section id="schedule" data-aos="fade-up">
     <h2>进度安排</h2>
     <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-content"><strong>2025.7.20–7.24</strong><p>前期准备（议题细化、问卷设计等）</p></div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-content"><strong>2025.7.25–7.31</strong><p>实地调研（问卷发放、访谈观察）</p></div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-content"><strong>2025.8.1–8.5</strong><p>数据整理与初步分析</p></div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-content"><strong>2025.8.6–8.11</strong><p>深度分析与成果撰写</p></div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-content"><strong>2025.8.12–8.15</strong><p>成果总结与展示</p></div>
-      </div>
+      <div class="timeline-item"><div class="timeline-content"><strong>2025.7.20–7.24</strong><p>前期准备（议题细化、问卷设计等）</p></div></div>
+      <div class="timeline-item"><div class="timeline-content"><strong>2025.7.25–7.31</strong><p>实地调研（问卷发放、访谈观察）</p></div></div>
+      <div class="timeline-item"><div class="timeline-content"><strong>2025.8.1–8.5</strong><p>数据整理与初步分析</p></div></div>
+      <div class="timeline-item"><div class="timeline-content"><strong>2025.8.6–8.11</strong><p>深度分析与成果撰写</p></div></div>
+      <div class="timeline-item"><div class="timeline-content"><strong>2025.8.12–8.15</strong><p>成果总结与展示</p></div></div>
     </div>
   </section>
 
@@ -369,7 +340,6 @@
   <section id="gallery" data-aos="fade-up">
     <h2>实践风采相册</h2>
     <div class="gallery">
-      <!-- 示例图片，添加更多即可 -->
       <a href="photo1_large.jpg" class="glightbox gallery-item"><img src="photo1_thumb.jpg" alt="调研现场1" /></a>
       <a href="photo2_large.jpg" class="glightbox gallery-item"><img src="photo2_thumb.jpg" alt="调研现场2" /></a>
       <a href="photo3_large.jpg" class="glightbox gallery-item"><img src="photo3_thumb.jpg" alt="团队合影" /></a>
@@ -382,7 +352,6 @@
     <div class="diary-entry"><h4>2025-07-20</h4><p>开展前期准备，细化调研议题并测试问卷。</p></div>
     <div class="diary-entry"><h4>2025-07-21</h4><p>走访村委会，与当地负责人沟通调研计划。</p></div>
     <div class="diary-entry"><h4>2025-07-22</h4><p>开展问卷发放与深度访谈。</p></div>
-    <!-- 可继续增补 -->
   </section>
 
   <section id="map" data-aos="fade-up">
@@ -395,32 +364,48 @@
     <div class="survey-card">
       <i class="fas fa-edit"></i>
       <p>问卷截止日期：2025-08-15</p>
-      <p>当前参与人数：120</p>
+      <p>当前参与人数：<span id="survey-count">加载中…</span></p>
       <a href="https://www.wjx.cn/vm/wpxJuZP.aspx#" target="_blank">填写问卷</a>
     </div>
   </section>
 
-  <section id="comments" data-aos="fade-up">
-    <h2>留言反馈</h2>
-    <div id="disqus_thread"></div>
+  <section id="feedback" data-aos="fade-up">
+    <h2>反馈</h2>
+    <form class="feedback-form" action="mailto:zs@nwafu.edu.cn" method="post" enctype="text/plain">
+      <label>您的邮箱：
+        <input type="email" name="email" required placeholder="example@domain.com" />
+      </label>
+      <label>反馈内容：
+        <textarea name="message" required placeholder="请输入您的建议或问题…"></textarea>
+      </label>
+      <button type="submit"><i class="fas fa-paper-plane"></i> 发送反馈</button>
+    </form>
   </section>
 
-  <section class="institutions" data-aos="fade-up">
-    <div class="logo-track">
-      <img src="partner1.png" alt="合作机构1" />
-      <img src="partner2.png" alt="合作机构2" />
-      <img src="partner3.png" alt="合作机构3" />
-      <img src="partner4.png" alt="合作机构4" />
-      <!-- 可重复一遍，实现无缝滚动 -->
-      <img src="partner1.png" alt="合作机构1" />
-      <img src="partner2.png" alt="合作机构2" />
-      <img src="partner3.png" alt="合作机构3" />
-      <img src="partner4.png" alt="合作机构4" />
+  <section id="partners" data-aos="fade-up">
+    <h2>合作机构</h2>
+    <div class="partners">
+      <div class="partner">
+        <img src="西农校徽.jpg" alt="西北农林科技大学" />
+        <p>西北农林科技大学</p>
+      </div>
+      <div class="partner">
+        <img src="信工院徽.png" alt="信息工程学院" />
+        <p>信息工程学院</p>
+      </div>
+      <div class="partner">
+        <img src="共青团张掖市委员会 .png" alt="共青团张掖市委员会" />
+        <p>共青团张掖市委员会</p>
+      </div>
+      <div class="partner">
+        <img src="共青团高台县委员会.png" alt="高台县共青团委员会" />
+        <p>高台县共青团委员会</p>
+      </div>
     </div>
   </section>
 
   <footer data-aos="fade-up">
-    <p>&copy; 2025 智享生活·智汇新风 团队 版权所有</p>
+    <p>&copy; 2025 智享生活·智汇新风 实践调研团 版权所有</p>
   </footer>
 
   <!-- 脚本 -->
@@ -428,31 +413,32 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js"></script>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    // 初始化 AOS
     AOS.init({ once: true });
+    GLightbox({ selector: '.glightbox' });
 
-    // 初始化 Lightbox
-    const lightbox = GLightbox({ selector: '.glightbox' });
-
-    // 初始化地图
-    var map = L.map('map').setView([38.4689, 100.4368], 10);
+    // 地图初始化：甘肃省张掖市高台县
+    var map = L.map('map').setView([38.9758, 100.4453], 10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
-    L.marker([38.4689, 100.4368]).addTo(map).bindPopup('甘肃张掖高台县');
+    L.marker([38.9758, 100.4453]).addTo(map).bindPopup('甘肃省张掖市高台县');
 
-    // Disqus 留言板
-    var disqus_config = function () {
-      this.page.url = window.location.href;
-      this.page.identifier = 'zhixiangshenghuo';
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://your-disqus-shortname.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
+    // JSONP 实时获取问卷星当前参与人数
+    function setCount(c) {
+      var el = document.getElementById('survey-count');
+      if (el) el.innerText = c + ' 人';
+    }
+    (function(){
+      var surveyID = 'wpxJuZP';
+      var callback = 'setCount';
+      var url = 'https://www.wjx.cn/wjx/join/NewCount.aspx'
+              + '?surveyID=' + surveyID
+              + '&callback=' + callback;
+      var s = document.createElement('script');
+      s.src = url; s.async = true;
+      document.body.appendChild(s);
     })();
   </script>
-  <noscript>请启用 JavaScript 查看留言板内容。</noscript>
+  <noscript>请启用 JavaScript 以获得更好体验。</noscript>
 </body>
 </html>

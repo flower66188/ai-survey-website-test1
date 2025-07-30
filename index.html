@@ -52,13 +52,6 @@
       margin: 0 auto;
       max-width: 80%;
     }
-    header .logo {
-      position: absolute; 
-      right:20px; 
-      top:50%; 
-      transform:translateY(-50%);
-      height:44px;
-    }
     /* 搜索框 */
     .search-container {
       max-width: 600px;
@@ -260,6 +253,10 @@
       font-size:1.22rem; 
       margin:34px 0 18px; 
       color:var(--main-blue);
+      display: none; /* 默认隐藏分组标题 */
+    }
+    .team-group-title.visible {
+      display: block; /* 筛选时根据条件显示 */
     }
     .cards {
       display:grid; 
@@ -375,16 +372,6 @@
       box-shadow:0 2px 8px rgba(0,0,0,0.1);
       transition:var(--transition-base);
       z-index: 1;
-    }
-    .tl-item::after {
-      content: attr(data-date);
-      position: absolute;
-      left: -120px;
-      top: 0;
-      color: var(--main-blue);
-      font-weight: 600;
-      font-size: 0.9rem;
-      white-space: nowrap;
     }
     .tl-item.open::before, .tl-item:hover::before { 
       background:var(--main-blue);
@@ -605,83 +592,13 @@
       font-weight:700; 
       color:var(--main-blue);
     }
-    /* 留言板 */
-    #feedback {
-      max-width:960px; 
-      margin:auto; 
-      padding:44px 20px 38px;
-      background:#fff; 
-      border-radius:var(--border-radius-md);
-      box-shadow:var(--shadow-sm);
-      margin-bottom:48px;
-    }
-    #feedback h2 {
-      position:relative; 
-      font-size:1.85rem; 
-      margin-bottom:23px;
-      color:var(--main-blue); 
-      font-weight:700;
-      letter-spacing: 1.5px;
-      text-align: center;
-    }
-    #feedback h2::after {
-      content:''; 
-      width:68px; 
-      height:4px;
-      background:var(--main-orange); 
-      position:absolute; 
-      left:50%; 
-      bottom:-12px;
-      transform:translateX(-50%); 
-      border-radius:2px;
-    }
-    .feedback-form {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
+    .contact-icon {
       color: var(--main-blue);
+      margin-right: 8px;
+      transition: color 0.2s;
     }
-    .form-control {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 1rem;
-      transition: var(--transition-base);
-    }
-    .form-control:focus {
-      border-color: var(--main-blue);
-      box-shadow: 0 0 0 3px rgba(0,76,151,0.1);
-      outline: none;
-    }
-    textarea.form-control {
-      min-height: 150px;
-      resize: vertical;
-    }
-    .btn-submit {
-      background: var(--main-blue);
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition-base);
-      font-size: 1.05rem;
-    }
-    .btn-submit:hover {
-      background: var(--main-orange);
-      color: var(--main-blue);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
+    .contact-link:hover .contact-icon {
+      color: var(--main-orange);
     }
     /* 合作机构 */
     .cooperation {
@@ -824,9 +741,6 @@
       #resources .cards { 
         gap:10px;
       }
-      .tl-item::after {
-        display: none;
-      }
       .org-list {
         gap: 30px;
       }
@@ -837,11 +751,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-      }
-      header .logo {
-        position: static;
-        transform: none;
-        margin-bottom: 15px;
       }
       header h1 {
         font-size: 2rem;
@@ -938,7 +847,6 @@
 </head>
 <body>
   <header data-aos="fade-down">
-    <img src="https://cdn.jsdelivr.net/gh/wutongtw/img@main/nwafu-logo.png" alt="西北农林科技大学校徽" class="logo"/>
     <h1>智享生活·智汇新风</h1>
   </header>
   
@@ -954,7 +862,6 @@
     <a href="#timeline"><i class="fas fa-stream"></i>实践事记</a>
     <a href="#resources"><i class="fas fa-folder-open"></i>资源宝库</a>
     <a href="#survey"><i class="fas fa-edit"></i>问卷调查</a>
-    <a href="#feedback"><i class="fas fa-comment"></i>留言反馈</a>
     <a href="#contact"><i class="fas fa-phone"></i>联系我们</a>
   </nav>
   
@@ -999,7 +906,7 @@
       <button class="team-filter" data-filter="队员组">队员</button>
     </div>
     
-    <h3 class="team-group-title">老师组</h3>
+    <h3 class="team-group-title 老师组 visible">老师组</h3>
     <div class="cards">
       <div class="card" data-aos="flip-left" data-group="老师组">
         <img src="李培铨.jpg" alt="李培铨老师，信息工程学院指导老师"/>
@@ -1021,7 +928,7 @@
       </div>
     </div>
     
-    <h3 class="team-group-title">队长组</h3>
+    <h3 class="team-group-title 队长组 visible">队长组</h3>
     <div class="cards">
       <div class="card" data-aos="flip-left" data-group="队长组">
         <img src="张舜.jpg" alt="张舜，计算机科学与技术专业，队长"/>
@@ -1044,7 +951,7 @@
       </div>
     </div>
     
-    <h3 class="team-group-title">队员组</h3>
+    <h3 class="team-group-title 队员组 visible">队员组</h3>
     <div class="cards">
       <div class="card" data-aos="flip-left" data-group="队员组"><img src="李佳乐.jpg" alt="李佳乐，计算机科学与技术专业"/><h3>李佳乐</h3><p>计算机科学与技术</p><details><summary>查看详情</summary><p>熟悉前端开发。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
       <div class="card" data-aos="flip-left" data-aos-delay="50" data-group="队员组"><img src="梅欣雨.jpg" alt="梅欣雨，大数据技术专业"/><h3>梅欣雨</h3><p>大数据技术</p><details><summary>查看详情</summary><p>擅长数据挖掘。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
@@ -1061,7 +968,7 @@
   <section id="timeline" data-aos="fade-up">
     <h2>实践事记</h2>
     <div class="tl">
-      <div class="tl-item open" data-date="7.20–8.15">
+      <div class="tl-item open">
         <strong>进度安排</strong>
         <span class="tl-hint">点击可收起</span>
         <div class="tl-detail">
@@ -1074,7 +981,7 @@
           </ul>
         </div>
       </div>
-      <div class="tl-item" data-date="8.15截止">
+      <div class="tl-item">
         <strong>成果展示</strong>
         <span class="tl-hint">点击展开</span>
         <div class="tl-detail">
@@ -1089,7 +996,7 @@
           </ul>
         </div>
       </div>
-      <div class="tl-item" data-date="持续更新">
+      <div class="tl-item">
         <strong>实践风采</strong>
         <span class="tl-hint">点击展开</span>
         <div class="tl-detail">
@@ -1101,7 +1008,7 @@
           </div>
         </div>
       </div>
-      <div class="tl-item" data-date="每日更新">
+      <div class="tl-item">
         <strong>实践日记</strong>
         <span class="tl-hint">点击展开</span>
         <div class="tl-detail">
@@ -1110,7 +1017,7 @@
           <div class="diary-entry"><h4>2025-07-22</h4><p>开展问卷发放与深度访谈。</p></div>
         </div>
       </div>
-      <div class="tl-item" data-date="固定地点">
+      <div class="tl-item">
         <strong>调研地点</strong>
         <span class="tl-hint">点击展开</span>
         <div class="tl-detail">
@@ -1184,26 +1091,6 @@
     </div>
   </section>
   
-  <!-- 留言反馈模块 -->
-  <section id="feedback" data-aos="fade-up">
-    <h2>留言反馈</h2>
-    <div class="feedback-form">
-      <div class="form-group">
-        <label for="name">您的姓名</label>
-        <input type="text" id="name" class="form-control" placeholder="请输入您的姓名" required>
-      </div>
-      <div class="form-group">
-        <label for="email">联系邮箱</label>
-        <input type="email" id="email" class="form-control" placeholder="请输入您的邮箱" required>
-      </div>
-      <div class="form-group">
-        <label for="message">留言内容</label>
-        <textarea id="message" class="form-control" placeholder="请输入您的建议或问题..." required></textarea>
-      </div>
-      <button type="submit" class="btn-submit">提交留言</button>
-    </div>
-  </section>
-  
   <!-- 联系方式模块 -->
   <div id="contact" style="background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); padding: 36px 40px; margin: 0 0 36px 0;">
     <h2 style="color: #004c97; font-size: 2.3rem; margin-bottom: 28px; font-family: 'Roboto Slab', serif; border-bottom: none; text-align: center;">联系方式</h2>
@@ -1212,14 +1099,34 @@
       <!-- 张舜 -->
       <div>
         <div style="margin-bottom: 14px;"><strong>负责人：</strong>张舜</div>
-        <div style="margin-bottom: 14px;"><strong>联系电话：</strong>19502913998</div>
-        <div style="margin-bottom: 8px;"><strong>联系邮箱：</strong>zs@nwafu.edu.cn</div>
+        <div style="margin-bottom: 14px;">
+          <strong>联系电话：</strong>
+          <a href="tel:19502913998" class="contact-link">
+            <i class="fas fa-phone contact-icon"></i>19502913998
+          </a>
+        </div>
+        <div style="margin-bottom: 8px;">
+          <strong>联系邮箱：</strong>
+          <a href="mailto:zs@nwafu.edu.cn" class="contact-link">
+            <i class="fas fa-envelope contact-icon"></i>zs@nwafu.edu.cn
+          </a>
+        </div>
       </div>
       <!-- 赵雅琪 -->
       <div>
         <div style="margin-bottom: 14px;"><strong>负责人：</strong>赵雅琪</div>
-        <div style="margin-bottom: 14px;"><strong>联系电话：</strong>15379786367</div>
-        <div style="margin-bottom: 8px;"><strong>联系邮箱：</strong>2023014527@nwafu.edu.cn</div>
+        <div style="margin-bottom: 14px;">
+          <strong>联系电话：</strong>
+          <a href="tel:15379786367" class="contact-link">
+            <i class="fas fa-phone contact-icon"></i>15379786367
+          </a>
+        </div>
+        <div style="margin-bottom: 8px;">
+          <strong>联系邮箱：</strong>
+          <a href="mailto:2023014527@nwafu.edu.cn" class="contact-link">
+            <i class="fas fa-envelope contact-icon"></i>2023014527@nwafu.edu.cn
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1273,9 +1180,10 @@
       if (idx === 0) item.classList.add('open');
     });
     
-    // 团队成员筛选功能
+    // 团队成员筛选功能优化
     const teamFilters = document.querySelectorAll('.team-filter');
     const teamCards = document.querySelectorAll('#team .card');
+    const groupTitles = document.querySelectorAll('.team-group-title');
     
     teamFilters.forEach(filter => {
       filter.addEventListener('click', () => {
@@ -1284,6 +1192,15 @@
         filter.classList.add('active');
         
         const filterValue = filter.getAttribute('data-filter');
+        
+        // 控制分组标题显示
+        groupTitles.forEach(title => {
+          if (filterValue === 'all' || title.classList.contains(filterValue)) {
+            title.classList.add('visible');
+          } else {
+            title.classList.remove('visible');
+          }
+        });
         
         // 筛选卡片
         teamCards.forEach(card => {
@@ -1310,6 +1227,9 @@
         
         if (name.includes(searchTerm) || info.includes(searchTerm) || details.includes(searchTerm)) {
           card.style.display = '';
+          // 显示对应分组标题
+          const group = card.getAttribute('data-group');
+          document.querySelector(`.team-group-title.${group}`).classList.add('visible');
         } else {
           card.style.display = 'none';
         }
@@ -1411,14 +1331,6 @@
       else index = Math.max(0, index-1);
       navLinks.forEach(l=>l.classList.remove('active'));
       navLinks[index].classList.add('active');
-    });
-    
-    // 留言表单提交
-    const feedbackForm = document.querySelector('.feedback-form');
-    feedbackForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      alert('感谢您的留言！我们会尽快回复您。');
-      feedbackForm.reset();
     });
   </script>
   <noscript>请启用 JavaScript 以获得更好体验，部分功能（如搜索、筛选、地图）将无法使用。</noscript>

@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>智享生活·智汇新风 | 社会实践</title>
-  <!-- 字体 & 图标 & 动画 & 相册 & 地图 -->
+  <title>智享生活·新风调研团官网</title>
+  <meta name="description" content="西北农林科技大学‘智享生活·智汇新风’调研团官方网页，展示AI乡村调研动态、成员、资源与合作机构。">
+  <meta name="keywords" content="智享生活, 智汇新风, 社会实践, AI调研, 乡村振兴, 信息工程学院">
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;600;700&family=Roboto+Slab:wght@400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
@@ -15,20 +16,37 @@
       --main-blue: #004c97;
       --main-orange: #f5a623;
       --gray-bg: #f7fafc;
-      --light: #fafafa;
-      --green: #16a085;
       --footer-gray: #333;
+      --light: #fafafa;
+      --stat-green: #1abc9c;
+      --stat-purple: #6c63ff;
+      --stat-yellow: #ffd600;
+      --dark-bg: #181c21;
+      --dark-section: #232c39;
     }
     * { box-sizing: border-box; margin:0; padding:0;}
+    html { scroll-behavior: smooth;}
     body {
       font-family: 'PT Sans', sans-serif;
       background: linear-gradient(135deg, #e8f0f8, var(--gray-bg));
       color: #333;
-      scroll-behavior: smooth;
       line-height: 1.6;
+      transition: background .4s, color .4s;
+    }
+    body.darkmode {
+      background: var(--dark-bg);
+      color: #eaeaea;
     }
     a { text-decoration:none; color:inherit; }
     h1,h2,h3 { font-family: 'Roboto Slab', serif; }
+    section[id] { scroll-margin-top: 90px; }
+    /* 粒子背景层 */
+    #particles-js {
+      position: absolute;
+      width: 100%; height: 100%;
+      left: 0; top: 0; z-index: 0;
+      pointer-events: none;
+    }
     /* 顶部Header */
     header {
       background: var(--main-blue);
@@ -42,19 +60,33 @@
       font-size:2.6rem; letter-spacing:2px;
       text-shadow:1px 2px 6px rgba(0,0,0,0.14);
       font-weight: 700;
+      position: relative; z-index:2;
     }
     header .logo {
       position: absolute; right:20px; top:50%; transform:translateY(-50%);
-      height:44px;
+      height:44px; z-index:2;
     }
-    /* 导航栏 */
+    /* 深色切换按钮 */
+    #toggle-dark {
+      position:fixed; top:18px; right:16px; z-index:999;
+      border:none;background:none;font-size:1.9em;cursor:pointer;
+      color: #ffd600; transition: color .22s;
+      filter: drop-shadow(0 1px 8px #fff8);
+    }
+    #toggle-dark:hover { color: #fff; }
+    body.darkmode #toggle-dark { color: #1abc9c; }
     nav {
       background:#fff;
       display:flex; flex-wrap:wrap; justify-content:center; align-items: center;
       gap:15px; padding:16px 0; position:sticky; top:0; z-index:200;
       box-shadow:0 2px 6px rgba(0,0,0,0.07);
       border-bottom: 2px solid #f0f3fa;
+      transition: box-shadow .22s, background .35s;
     }
+    nav.sticky-shadow {
+      box-shadow:0 4px 22px rgba(0,76,151,0.13);
+    }
+    body.darkmode nav { background: var(--dark-section); }
     nav a {
       color:var(--main-blue); padding:8px 18px;
       border-radius:24px; font-weight:600;
@@ -64,14 +96,17 @@
     nav a.active, nav a:hover {
       background:var(--main-blue); color:#fff;
     }
-    nav a .fas { margin-right:7px; }
-    /* 英雄区 */
+    body.darkmode nav a { color: #b3d1ff; }
     .hero {
       background: linear-gradient(rgba(0,76,151,.82),rgba(33, 74, 139,0.52)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      color:#fff; text-align:center; padding:90px 18px 70px; margin-bottom:44px;
+      color:#fff; text-align:center; padding:112px 18px 90px; margin-bottom:44px;
       border-radius:0 0 40px 40px;
       box-shadow:0 8px 36px rgba(0,60,150,0.08);
       position:relative;
+      overflow: hidden;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
     }
     .hero h2 {
       font-size:2.3rem; margin-bottom:14px;
@@ -89,33 +124,71 @@
       transition:.25s;
       border:none; cursor:pointer;
       letter-spacing: 2px;
+      z-index:2; position:relative;
     }
     .hero .hero-btn:hover {
       background:var(--main-blue); color:#fff;
       box-shadow:0 5px 20px rgba(0,76,151,0.13);
       letter-spacing: 4px;
     }
-    /* 通用区块 */
+    /* 首页统计卡片 */
+    .stats-row {
+      display:flex; justify-content:center; gap:36px;
+      margin-top: -66px; margin-bottom: 16px; position:relative; z-index:3;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 1px 14px rgba(0,76,151,0.10);
+      padding:24px 40px 16px 40px;
+      min-width:170px;
+      text-align:center;
+      transition: box-shadow .23s, transform .21s;
+    }
+    .stat-card:hover {
+      box-shadow: 0 8px 34px #ffd60030, 0 3px 10px #1abc9c22;
+      transform: translateY(-8px) scale(1.03);
+    }
+    .stat-icon {
+      font-size:2.2em;
+      margin-bottom: 8px;
+    }
+    .stat-green { color:var(--stat-green);}
+    .stat-yellow { color:var(--stat-yellow);}
+    .stat-purple { color:var(--stat-purple);}
+    .stat-num {
+      font-size:2.4em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 7px;
+      line-height: 1.1;
+    }
+    .stat-label { font-size:1.05em; color:#444;}
+    body.darkmode .stat-card { background: var(--dark-section);}
     section {
       max-width:960px; margin:auto; padding:44px 20px 38px;
       background:#fff; border-radius:14px;
       box-shadow:0 3px 20px rgba(0,0,0,0.05);
       margin-bottom:48px;
+      transition: background .4s;
     }
+    body.darkmode section { background: var(--dark-section);}
     section h2 {
       position:relative; font-size:1.85rem; margin-bottom:23px;
       color:var(--main-blue); font-weight:700;
       letter-spacing: 1.5px;
     }
+    body.darkmode section h2 { color:#8cc9ff;}
     section h2::after {
       content:''; width:68px; height:4px;
       background:var(--main-orange); position:absolute; left:50%; bottom:-12px;
       transform:translateX(-50%); border-radius:2px;
     }
-    /* 团队成员 */
     .team-group-title {
       font-size:1.22rem; margin:34px 0 18px; color:var(--main-blue);
     }
+    body.darkmode .team-group-title { color: #9fcfff;}
     .cards {
       display:grid; grid-template-columns:repeat(auto-fit,minmax(192px,1fr));
       gap:22px;
@@ -123,13 +196,14 @@
     .card {
       background:var(--light);
       border-radius:12px; overflow:hidden; text-align:center;
-      transition:transform .25s, box-shadow .28s;
+      transition:transform .22s, box-shadow .26s;
       box-shadow: 0 1px 8px rgba(0,0,0,0.06);
       position: relative;
+      cursor:pointer;
     }
     .card:hover {
       transform:translateY(-10px) scale(1.03);
-      box-shadow:0 10px 32px rgba(0,76,151,0.13);
+      box-shadow:0 10px 36px 0 rgba(245,166,35,0.10),0 2px 10px rgba(0,76,151,0.12);
       border:2px solid var(--main-orange);
       z-index:1;
     }
@@ -138,12 +212,14 @@
       border-radius:12px 12px 0 0;
       transition:filter .24s;
       filter: grayscale(10%);
+      background: #f6f6f6;
     }
-    .card:hover img { filter: grayscale(0%); }
+    .card:hover img { filter: grayscale(0%);}
     .card h3 {
       font-size:1.12rem; margin:13px 0 6px; color:var(--main-blue);
       font-weight: 600;
     }
+    body.darkmode .card, body.darkmode #resources .cards .card { background: #202938;}
     .card p {
       font-size:.96rem; color:#666; padding:0 10px 12px;
     }
@@ -163,9 +239,42 @@
     .card .member-extra a {
       color: var(--main-blue);
       transition: color 0.2s;
+      display: inline-block;
     }
+    .card .member-extra a[href="#"], .card .member-extra a:not([href]) { display: none;}
     .card .member-extra a:hover { color: var(--main-orange);}
-    /* 时间轴 */
+    /* 卡片弹窗模态 */
+    .modal-mask {
+      position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.4); z-index: 10010; display: none;
+      align-items: center; justify-content: center;
+    }
+    .modal-mask.show { display: flex;}
+    .modal-card {
+      background: #fff; border-radius: 16px; max-width: 370px; width:96vw;
+      box-shadow: 0 12px 60px rgba(0,0,0,0.13);
+      padding: 34px 26px 22px;
+      text-align: center;
+      position: relative;
+      animation: modalIn .32s;
+    }
+    @keyframes modalIn {
+      from { transform: translateY(80px) scale(.89); opacity: 0;}
+      to   { transform: none; opacity: 1;}
+    }
+    .modal-card img { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; margin-bottom: 14px;}
+    .modal-card h3 { margin-bottom: 8px; font-size: 1.24rem;}
+    .modal-close { position: absolute; right:12px; top:10px; font-size:1.8em; color:#aaa; cursor:pointer;}
+    .modal-close:hover { color:var(--main-orange);}
+    .modal-card .desc { color: #666; margin-bottom: 12px;}
+    .modal-card .member-extra { justify-content:center; gap:16px;}
+    /* 时间轴展开高亮，竖条高亮 */
+    .tl-item.open {
+      background: #f0f6fb;
+      border-radius: 7px;
+      box-shadow: 0 1px 6px rgba(0,76,151,0.03);
+      border-left: 5px solid var(--main-blue);
+    }
     .tl { position:relative; padding-left:54px; margin-top:20px;}
     .tl::before {
       content:''; position:absolute; left:30px; top:0; bottom:0;
@@ -223,6 +332,7 @@
       width:80px; height:56px; object-fit:cover;
       border-radius:4px; box-shadow:0 1px 6px rgba(0,0,0,0.07);
       transition: transform .2s;
+      background: #fafafa;
     }
     .tl-detail .gallery img:hover {
       transform:scale(1.13);
@@ -232,47 +342,6 @@
       width:100%; height:300px; margin-top:10px; border-radius:6px;
       box-shadow: 0 2px 7px rgba(0,76,151,0.08);
     }
-    /* 资源宝库 */
-    #resources .filter-bar {
-      text-align:center; margin-bottom:23px; overflow-x:auto; white-space:nowrap;
-    }
-    #resources .filter-bar {
-      scrollbar-width:thin;
-    }
-    #resources .filter-bar button {
-      display: inline-block;
-      margin:0 9px 6px 0; padding:6px 14px;
-      border:none; border-radius:5px; background:#e2e8f0;
-      cursor:pointer; transition:background .23s, color .24s;
-      font-size: 1.01em;
-      min-width: 68px;
-    }
-    #resources .filter-bar button.active {
-      background:var(--main-blue); color:#fff;
-    }
-    #resources .cards {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(166px,1fr));
-      gap:16px;
-    }
-    #resources .cards .card {
-      background:var(--light); padding:13px 10px 10px;
-      border-radius:6px; text-align:center; box-shadow:0 1px 8px rgba(0,0,0,0.07);
-      cursor: pointer;
-      transition:box-shadow .22s, transform .2s, border .2s;
-      border:1.5px solid #f0f3fa;
-    }
-    #resources .cards .card:hover {
-      background: #fff8ef;
-      box-shadow: 0 6px 16px rgba(245,166,35,0.09);
-      transform: translateY(-6px) scale(1.03);
-      border:2px solid var(--main-orange);
-    }
-    #resources .cards .card img {
-      width:100%; aspect-ratio: 1.7/1; object-fit:cover; border-radius:4px;
-    }
-    #resources .cards .card p { margin:10px 0 6px; font-size:1.02rem; font-weight: 600;}
-    #resources .cards .card small { color:#888;}
-    /* 问卷 */
     .survey-section { text-align:center;}
     .survey-card {
       display:inline-block; background:#f9f9f9;
@@ -294,10 +363,31 @@
       font-size:1.07rem;
     }
     .survey-card a:hover { background:var(--main-orange); color:var(--main-blue);}
-    /* 联系我们 */
-    #contact p { font-size:1.08rem; color:#333; margin:11px 0;}
-    #contact p span { font-weight:700; color:var(--main-blue);}
-    /* Footer */
+    .contact-flex {
+      display: flex; gap: 80px; font-size: 1.18rem; flex-wrap: wrap; margin-bottom:10px;
+    }
+    .contact-flex > div { min-width: 220px;}
+    @media (max-width: 600px) {
+      .contact-flex { flex-direction: column; gap: 22px; }
+    }
+    .partners-row {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 34px; margin-top: 18px;
+    }
+    .partner-logo-box {
+      background: #fff; border-radius: 50%; box-shadow: 0 2px 7px rgba(0,0,0,0.04);
+      padding: 16px; display: flex; align-items: center; justify-content: center;
+      width: 88px; height: 88px; margin: 0 auto 12px auto;
+      transition: box-shadow .22s;
+    }
+    .partner-logo-box img {
+      height: 56px; width: 56px; object-fit: contain; border-radius: 50%; background: #fff; display: block;
+    }
+    .partner-logo-box:hover {
+      box-shadow: 0 4px 16px #ffd60077, 0 2px 12px #1abc9c22;
+    }
+    .partner-title {
+      margin-top: 4px; font-size: 1.1rem; font-weight: 600; text-align: center;
+    }
     footer {
       background: var(--footer-gray); color:#fff;
       text-align:center; padding:22px 10px 13px;
@@ -306,19 +396,18 @@
       margin-bottom:0;
       position:relative;
     }
-    footer .footer-links {
+    .footer-links {
       margin-top:7px; font-size:.98em;
     }
-    footer .footer-links a {
+    .footer-links a {
       color:#fae28a;
       margin:0 8px; text-decoration: underline; transition: color 0.2s;
     }
-    footer .footer-links a:hover { color:var(--main-orange);}
-    footer img.footer-logo {
-      height:34px; vertical-align:middle; margin-right:12px; opacity: 0.86;
+    .footer-links a:hover { color:var(--main-orange);}
+    .footer-logo {
+      height:30px; vertical-align:middle; margin-right:12px; opacity: 0.86;
       display: inline-block;
     }
-    /* 回到顶部按钮 */
     #backToTop {
       display: none;
       position:fixed; right:18px; bottom:36px; z-index:999;
@@ -330,9 +419,12 @@
       opacity: 0.87;
     }
     #backToTop:hover { background: var(--main-orange); color:var(--main-blue);}
-    /* 响应式优化 */
+    @media (max-width: 900px) {
+      .stats-row { gap: 12px; }
+      .stat-card { padding:22px 12vw 12px 12vw; min-width:110px;}
+    }
     @media (max-width: 780px) {
-      .hero { padding:54px 10px 38px; font-size:0.98em;}
+      .hero { padding:70px 10px 38px; font-size:0.98em;}
       section { padding:23px 5vw 19px;}
       nav { gap:8px;}
       .cards { grid-template-columns:repeat(auto-fit,minmax(147px,1fr)); gap:14px;}
@@ -340,31 +432,31 @@
     }
     @media (max-width:500px) {
       header {padding:18px 5px 14px;}
-      .hero { padding:33px 3vw 22px; border-radius:0 0 17px 17px;}
-      section { padding:16px 3vw 10px;}
-      .tl { padding-left:19px;}
-      .tl::before { left:7px;}
-      .tl-item { margin-bottom:18px;}
-      .tl-item::before { left:-20px; width:16px; height:16px;}
+      .hero { padding:32px 2vw 12px; border-radius:0 0 17px 17px;}
+      .hero-inner { padding-top:38px;}
+      section { padding:12px 2vw 6px;}
       #backToTop { width:39px; height:39px; font-size:1.3rem;}
-    }
-    @media (max-width:390px) {
-      nav { gap:3px; font-size: 13px;}
+      .partner-logo-box { width:44px; height:44px; padding:4px;}
+      .partner-logo-box img { height:28px; width:28px;}
+      .partners-row { gap:12px;}
     }
     @media (prefers-color-scheme: dark) {
-      body { background:#181c21; color:#eaeaea;}
-      header, nav, section, .survey-card, #resources .cards .card, footer {
+      body:not(.darkmode) { background:#181c21; color:#eaeaea;}
+      header, nav, section, .survey-card, .contact-flex, .partners-row, footer, .modal-card {
         background:#232c39; color:#ccc;
       }
-      .tl::before { background:#757575; }
-      .tl-item::before { background:var(--main-orange); border-color:#232c39;}
-      #backToTop { background: #2a3d5b; }
     }
+    body.darkmode .modal-card { background: #1c2233; color: #d9eaff;}
+    body.darkmode .stat-label, body.darkmode .modal-card .desc, body.darkmode .card p { color: #96a6b6;}
+    body.darkmode .tl-item.open { background: #212f44;}
+    body.darkmode .tl-detail { background: #192331;}
+    body.darkmode .stat-num { color: #ffd600;}
   </style>
 </head>
 <body>
+  <button id="toggle-dark" title="切换深色模式"><i class="fas fa-moon"></i></button>
   <header data-aos="fade-down">
-    <img src="https://cdn.jsdelivr.net/gh/wutongtw/img@main/nwafu-logo.png" alt="西北农林科技大学" class="logo"/>
+    <img src="西农校徽.jpg" alt="西北农林科技大学" class="logo"/>
     <h1>智享生活·智汇新风</h1>
   </header>
   <nav data-aos="fade-down" data-aos-delay="100" id="mainNav">
@@ -375,72 +467,84 @@
     <a href="#survey"><i class="fas fa-edit"></i>问卷调查</a>
     <a href="#contact"><i class="fas fa-phone"></i>联系我们</a>
   </nav>
-
-  <section class="hero" data-aos="zoom-in">
-    <h2>探索乡村 AI 认知</h2>
-    <p>共塑智慧基层服务新未来</p>
-    <a class="hero-btn" href="#about">了解更多 &nbsp;<i class="fas fa-chevron-down"></i></a>
+  <!-- 粒子动态Banner（移动端自动关闭） -->
+  <section class="hero" style="position:relative;">
+    <div id="particles-js"></div>
+    <div class="hero-inner">
+      <h2>探索乡村 AI 认知</h2>
+      <p>共塑智慧基层服务新未来</p>
+      <a class="hero-btn" href="#about">了解更多 &nbsp;<i class="fas fa-chevron-down"></i></a>
+    </div>
   </section>
+  <!-- 首页数据统计 -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon stat-green"><i class="fas fa-user-friends"></i></div>
+      <div class="stat-num" data-count="11">0</div>
+      <div class="stat-label">团队成员</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon stat-yellow"><i class="fas fa-clipboard-list"></i></div>
+      <div class="stat-num" data-count="300">0</div>
+      <div class="stat-label">问卷数量</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon stat-purple"><i class="fas fa-map-marker-alt"></i></div>
+      <div class="stat-num" data-count="5">0</div>
+      <div class="stat-label">实地调研点</div>
+    </div>
+  </div>
 
   <section id="about" data-aos="fade-up">
     <h2>关于项目</h2>
     <p>为贯彻“数字中国”“智慧社会”战略，西北农林科技大学信息工程学院组建“智享生活·智汇新风”调研团，拟于2025年7月20日至8月15日在甘肃张掖高台县开展基层 AI 认知调研。</p>
   </section>
-
   <section id="team" data-aos="fade-up">
     <h2>团队成员</h2>
     <h3 class="team-group-title">老师组</h3>
     <div class="cards">
-      <div class="card" data-aos="flip-left">
-        <img src="李培铨.jpg" alt="李培铨"/>
+      <div class="card" data-img="李培铨.jpg" data-name="李培铨" data-title="指导老师 | 信息工程学院" data-desc="研究方向：智慧教育；联系方式：********">
+        <img src="李培铨.jpg" alt="李培铨" loading="lazy"/>
         <h3>李培铨</h3><p>指导老师 | 信息工程学院</p>
-        <details><summary>查看详情</summary><p>研究方向：智慧教育；联系方式：<br>********</p>
         <div class="member-extra">
           <a href="mailto:example1@nwafu.edu.cn" title="邮箱"><i class="fas fa-envelope"></i></a>
         </div>
-        </details>
       </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="100">
-        <img src="牟铨波.jpg" alt="牟铨波"/>
+      <div class="card" data-img="牟铨波.jpg" data-name="牟铨波" data-title="带队老师 | 信息工程学院" data-desc="研究方向：农村信息化；联系方式：********">
+        <img src="牟铨波.jpg" alt="牟铨波" loading="lazy"/>
         <h3>牟铨波</h3><p>带队老师 | 信息工程学院</p>
-        <details><summary>查看详情</summary><p>研究方向：农村信息化；联系方式：<br>********</p>
         <div class="member-extra">
           <a href="mailto:example2@nwafu.edu.cn" title="邮箱"><i class="fas fa-envelope"></i></a>
         </div>
-        </details>
       </div>
     </div>
     <h3 class="team-group-title">队长组</h3>
     <div class="cards">
-      <div class="card" data-aos="flip-left">
-        <img src="张舜.jpg" alt="张舜"/><h3>张舜</h3><p>队长 | 计算机科学与技术</p>
-        <details><summary>查看详情</summary><p>擅长数据分析与项目管理；联系方式：19502913998</p>
+      <div class="card" data-img="张舜.jpg" data-name="张舜" data-title="队长 | 计算机科学与技术" data-desc="擅长数据分析与项目管理。联系方式：19502913998">
+        <img src="张舜.jpg" alt="张舜" loading="lazy"/><h3>张舜</h3><p>队长 | 计算机科学与技术</p>
         <div class="member-extra">
           <a href="mailto:zs@nwafu.edu.cn" title="邮箱"><i class="fas fa-envelope"></i></a>
           <a href="https://weixin.qq.com/" title="微信"><i class="fab fa-weixin"></i></a>
         </div>
-        </details>
       </div>
-      <div class="card" data-aos="flip-left" data-aos-delay="100">
-        <img src="赵雅琪.jpg" alt="赵雅琪"/><h3>赵雅琪</h3><p>副队长 | 信息与计算科学</p>
-        <details><summary>查看详情</summary><p>擅长逻辑建模与调研执行；联系方式：********</p>
+      <div class="card" data-img="赵雅琪.jpg" data-name="赵雅琪" data-title="副队长 | 信息与计算科学" data-desc="擅长逻辑建模与调研执行。联系方式：15379786367">
+        <img src="赵雅琪.jpg" alt="赵雅琪" loading="lazy"/><h3>赵雅琪</h3><p>副队长 | 信息与计算科学</p>
         <div class="member-extra">
-          <a href="mailto:example3@nwafu.edu.cn" title="邮箱"><i class="fas fa-envelope"></i></a>
+          <a href="mailto:2023014527@nwafu.edu.cn" title="邮箱"><i class="fas fa-envelope"></i></a>
         </div>
-        </details>
       </div>
     </div>
     <h3 class="team-group-title">队员组</h3>
     <div class="cards">
-      <div class="card" data-aos="flip-left"><img src="李佳乐.jpg" alt="李佳乐"/><h3>李佳乐</h3><p>计算机科学与技术</p><details><summary>查看详情</summary><p>熟悉前端开发。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="50"><img src="梅欣雨.jpg" alt="梅欣雨"/><h3>梅欣雨</h3><p>大数据技术</p><details><summary>查看详情</summary><p>擅长数据挖掘。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="100"><img src="李菲.jpg" alt="李菲"/><h3>李菲</h3><p>计算机科学与技术</p><details><summary>查看详情</summary><p>图像处理方向。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="150"><img src="宋冰艳.jpg" alt="宋冰艳"/><h3>宋冰艳</h3><p>计算机科学与技术</p><details><summary>查看详情</summary><p>擅长调研与采访。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="200"><img src="王玟.jpg" alt="王玟"/><h3>王玟</h3><p>食品质量与安全</p><details><summary>查看详情</summary><p>注重食品科普。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="250"><img src="殷璐.jpg" alt="殷璐"/><h3>殷璐</h3><p>水土保持与荒漠化防治</p><details><summary>查看详情</summary><p>环境与生态方向。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="300"><img src="张蕊.jpg" alt="张蕊"/><h3>张蕊</h3><p>金融学</p><details><summary>查看详情</summary><p>擅长经济政策分析。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="350"><img src="蒋泊远.jpg" alt="蒋泊远"/><h3>蒋泊远</h3><p>市场营销</p><details><summary>查看详情</summary><p>市场调研与传播。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
-      <div class="card" data-aos="flip-left" data-aos-delay="400"><img src="王宸.jpg" alt="王宸"/><h3>王宸</h3><p>地理信息科学</p><details><summary>查看详情</summary><p>GIS 应用分析。</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></details></div>
+      <div class="card" data-img="李佳乐.jpg" data-name="李佳乐" data-title="计算机科学与技术" data-desc="熟悉前端开发。"><img src="李佳乐.jpg" alt="李佳乐" loading="lazy"/><h3>李佳乐</h3><p>计算机科学与技术</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+      <div class="card" data-img="梅欣雨.jpg" data-name="梅欣雨" data-title="大数据技术" data-desc="擅长数据挖掘。"><img src="梅欣雨.jpg" alt="梅欣雨" loading="lazy"/><h3>梅欣雨</h3><p>大数据技术</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+      <div class="card" data-img="李菲.jpg" data-name="李菲" data-title="计算机科学与技术" data-desc="图像处理方向。"><img src="李菲.jpg" alt="李菲" loading="lazy"/><h3>李菲</h3><p>计算机科学与技术</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+      <div class="card" data-img="宋冰艳.jpg" data-name="宋冰艳" data-title="计算机科学与技术" data-desc="擅长调研与采访。"><img src="宋冰艳.jpg" alt="宋冰艳" loading="lazy"/><h3>宋冰艳</h3><p>计算机科学与技术</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+      <div class="card" data-img="王玟.jpg" data-name="王玟" data-title="食品质量与安全" data-desc="注重食品科普。"><img src="王玟.jpg" alt="王玟" loading="lazy"/><h3>王玟</h3><p>食品质量与安全</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+      <div class="card" data-img="殷璐.jpg" data-name="殷璐" data-title="水土保持与荒漠化防治" data-desc="环境与生态方向。"><img src="殷璐.jpg" alt="殷璐" loading="lazy"/><h3>殷璐</h3><p>水土保持与荒漠化防治</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+      <div class="card" data-img="张蕊.jpg" data-name="张蕊" data-title="金融学" data-desc="擅长经济政策分析。"><img src="张蕊.jpg" alt="张蕊" loading="lazy"/><h3>张蕊</h3><p>金融学</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+      <div class="card" data-img="蒋泊远.jpg" data-name="蒋泊远" data-title="市场营销" data-desc="市场调研与传播。"><img src="蒋泊远.jpg" alt="蒋泊远" loading="lazy"/><h3>蒋泊远</h3><p>市场营销</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+      <div class="card" data-img="王宸.jpg" data-name="王宸" data-title="地理信息科学" data-desc="GIS 应用分析。"><img src="王宸.jpg" alt="王宸" loading="lazy"/><h3>王宸</h3><p>地理信息科学</p><div class="member-extra"><a href="#"><i class="fas fa-envelope"></i></a></div></div>
     </div>
   </section>
 
@@ -480,10 +584,10 @@
         <span class="tl-hint">点击展开</span>
         <div class="tl-detail">
           <div class="gallery">
-            <a href="photo1_large.jpg" class="glightbox gallery-item"><img src="photo1_thumb.jpg" alt="调研现场1"/></a>
-            <a href="photo2_large.jpg" class="glightbox gallery-item"><img src="photo2_thumb.jpg" alt="调研现场2"/></a>
-            <a href="photo3_large.jpg" class="glightbox gallery-item"><img src="photo3_thumb.jpg" alt="团队合影"/></a>
-            <a href="photo4_large.jpg" class="glightbox gallery-item"><img src="photo4_thumb.jpg" alt="与村民交流"/></a>
+            <a href="photo1_large.jpg" class="glightbox gallery-item"><img src="photo1_thumb.jpg" alt="调研现场1" loading="lazy"/></a>
+            <a href="photo2_large.jpg" class="glightbox gallery-item"><img src="photo2_thumb.jpg" alt="调研现场2" loading="lazy"/></a>
+            <a href="photo3_large.jpg" class="glightbox gallery-item"><img src="photo3_thumb.jpg" alt="团队合影" loading="lazy"/></a>
+            <a href="photo4_large.jpg" class="glightbox gallery-item"><img src="photo4_thumb.jpg" alt="与村民交流" loading="lazy"/></a>
           </div>
         </div>
       </div>
@@ -516,32 +620,31 @@
     </div>
     <div class="cards">
       <div class="card" data-type="article" data-link="https://www.example.com/ai-intro">
-        <img src="https://via.placeholder.com/150x90" alt="AI入门"/>
+        <img src="https://via.placeholder.com/150x90" alt="AI入门" loading="lazy"/>
         <p>AI 入门教程</p><small>文章</small>
       </div>
       <div class="card" data-type="video" data-link="https://www.example.com/video">
-        <img src="https://via.placeholder.com/150x90" alt="纪录片"/>
+        <img src="https://via.placeholder.com/150x90" alt="纪录片" loading="lazy"/>
         <p>乡村调研纪录片</p><small>视频</small>
       </div>
       <div class="card" data-type="applet" data-link="https://www.wjx.cn/vm/wpxJuZP.aspx#">
-        <img src="https://via.placeholder.com/150x90" alt="小程序"/>
+        <img src="https://via.placeholder.com/150x90" alt="小程序" loading="lazy"/>
         <p>问卷星小程序</p><small>小程序</small>
       </div>
       <div class="card" data-type="article" data-link="https://www.example.com/ai-agriculture">
-        <img src="https://via.placeholder.com/150x90" alt="报告"/>
+        <img src="https://via.placeholder.com/150x90" alt="报告" loading="lazy"/>
         <p>智慧农业报告</p><small>文章</small>
       </div>
       <div class="card" data-type="video" data-link="https://www.example.com/drone">
-        <img src="https://via.placeholder.com/150x90" alt="无人机"/>
+        <img src="https://via.placeholder.com/150x90" alt="无人机" loading="lazy"/>
         <p>无人机巡田视频</p><small>视频</small>
       </div>
       <div class="card" data-type="applet" data-link="https://www.example.com/app">
-        <img src="https://via.placeholder.com/150x90" alt="监测"/>
+        <img src="https://via.placeholder.com/150x90" alt="监测" loading="lazy"/>
         <p>环境监测小程序</p><small>小程序</small>
       </div>
     </div>
   </section>
-
   <section id="survey" class="survey-section" data-aos="fade-up">
     <h2>问卷调查</h2>
     <div class="survey-card">
@@ -551,67 +654,61 @@
       <a href="https://www.wjx.cn/vm/wpxJuZP.aspx#" target="_blank">填写问卷</a>
     </div>
   </section>
-
-<!-- 联系方式模块并排版 -->
-<div style="background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); padding: 36px 40px; margin: 0 0 36px 0;">
-  <h2 style="color: #004c97; font-size: 2.3rem; margin-bottom: 28px; font-family: 'Roboto Slab', serif; border-bottom: none;">联系方式</h2>
-  <div style="border-top: 4px solid #004c97; width: 90px; margin: -22px 0 24px 0;"></div>
-  <div style="display: flex; flex-wrap: wrap; gap: 80px; font-size: 1.18rem;">
-    <!-- 张舜 -->
-    <div>
-      <div style="margin-bottom: 14px;"><strong>负责人：</strong>张舜</div>
-      <div style="margin-bottom: 14px;"><strong>联系电话：</strong>19502913998</div>
-      <div style="margin-bottom: 8px;"><strong>联系邮箱：</strong>zs@nwafu.edu.cn</div>
+  <!-- 联系方式横向并列 -->
+  <section id="contact" style="background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); padding: 36px 40px; margin: 0 0 36px 0;">
+    <h2 style="color: #004c97; font-size: 2.3rem; margin-bottom: 28px; font-family: 'Roboto Slab', serif; border-bottom: none;">联系方式</h2>
+    <div style="border-top: 4px solid #004c97; width: 90px; margin: -22px 0 24px 0;"></div>
+    <div class="contact-flex">
+      <div>
+        <div style="margin-bottom: 14px;"><strong>负责人：</strong>张舜</div>
+        <div style="margin-bottom: 14px;"><strong>联系电话：</strong>19502913998</div>
+        <div style="margin-bottom: 8px;"><strong>联系邮箱：</strong>zs@nwafu.edu.cn</div>
+      </div>
+      <div>
+        <div style="margin-bottom: 14px;"><strong>负责人：</strong>赵雅琪</div>
+        <div style="margin-bottom: 14px;"><strong>联系电话：</strong>15379786367</div>
+        <div style="margin-bottom: 8px;"><strong>联系邮箱：</strong>2023014527@nwafu.edu.cn</div>
+      </div>
     </div>
-    <!-- 赵雅琪 -->
-    <div>
-      <div style="margin-bottom: 14px;"><strong>负责人：</strong>赵雅琪</div>
-      <div style="margin-bottom: 14px;"><strong>联系电话：</strong>15379786367</div>
-      <div style="margin-bottom: 8px;"><strong>联系邮箱：</strong>2023014527@nwafu.edu.cn</div>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- 合作机构模块 开始 -->
-<div style="background: #f7fafc;">
-  <div style="max-width: 1200px; margin: 0 auto; padding: 42px 0 0 0; display: flex; flex-direction: column; gap: 32px;">
-    <!-- 合作机构卡片 -->
-    <div style="background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); padding: 36px 40px; margin: 0 0 36px 0;">
-      <h2 style="color: #004c97; font-size: 2.3rem; margin-bottom: 8px; font-family: 'Roboto Slab', serif;">合作机构</h2>
-      <div style="height: 5px; width: 70px; margin: 10px auto 36px auto; background: #f5a623; border-radius: 2px;"></div>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 54px;">
-        <div style="text-align: center;">
-          <img src="西农校徽.jpg" alt="西北农林科技大学" style="height: 64px; margin-bottom: 10px;" />
-          <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 600;">西北农林科技大学</div>
-        </div>
-        <div style="text-align: center;">
-          <img src="信工院徽.png" alt="信息工程学院" style="height: 64px; margin-bottom: 10px;" />
-          <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 600;">信息工程学院</div>
-        </div>
-        <div style="text-align: center;">
-          <img src="共青团张掖市委员会.png" alt="共青团张掖市委员会" style="height: 64px; margin-bottom: 10px;" />
-          <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 600;">共青团张掖市委员会</div>
-        </div>
-        <div style="text-align: center;">
-          <img src="共青团高台县委员会.png" alt="高台县共青团委员会" style="height: 64px; margin-bottom: 10px;" />
-          <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 600;">高台县共青团委员会</div>
+  </section>
+  <div style="background: #f7fafc; padding-bottom:38px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="background: #fff; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); padding: 36px 40px; margin: 0 0 36px 0;">
+        <h2 style="color: #004c97; font-size: 2.3rem; margin-bottom: 8px; font-family: 'Roboto Slab', serif;">合作机构</h2>
+        <div style="height: 5px; width: 70px; margin: 10px auto 36px auto; background: #f5a623; border-radius: 2px;"></div>
+        <div class="partners-row">
+          <div>
+            <div class="partner-logo-box"><img src="西农校徽.jpg" alt="西北农林科技大学" loading="lazy"/></div>
+            <div class="partner-title">西北农林科技大学</div>
+          </div>
+          <div>
+            <div class="partner-logo-box"><img src="信工院徽.png" alt="信息工程学院" loading="lazy"/></div>
+            <div class="partner-title">信息工程学院</div>
+          </div>
+          <div>
+            <div class="partner-logo-box"><img src="共青团张掖市委员会.png" alt="共青团张掖市委员会" loading="lazy"/></div>
+            <div class="partner-title">共青团张掖市委员会</div>
+          </div>
+          <div>
+            <div class="partner-logo-box"><img src="共青团高台县委员会.png" alt="高台县共青团委员会" loading="lazy"/></div>
+            <div class="partner-title">高台县共青团委员会</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!-- 合作机构模块 结束 -->
-
-<footer style="background: #004c97; color: #fff; text-align: center; padding: 20px 10px; font-size: 1.05rem;">
-  © 2025 智享生活·智汇新风 团队 版权所有
-</footer>
-
-
-  <!-- 回到顶部按钮 -->
+  <footer>
+    <img src="西农校徽.jpg" class="footer-logo" alt="西北农林科技大学"/>
+    © 2025 智享生活·智汇新风 团队 版权所有
+    <div class="footer-links">
+      <a href="https://www.nwsuaf.edu.cn/" target="_blank">西北农林科技大学</a> |
+      <a href="https://xxgc.nwsuaf.edu.cn/" target="_blank">信息工程学院</a> |
+      <a href="https://beian.miit.gov.cn/" target="_blank">陕ICP备20240404号</a>
+    </div>
+  </footer>
   <button id="backToTop" title="回到顶部"><i class="fas fa-arrow-up"></i></button>
-  <!-- 脚本 -->
+  <!-- 粒子js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js"></script>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -619,67 +716,23 @@
     // 动画初始化
     AOS.init({ once: true });
     GLightbox({ selector: '.glightbox' });
-
-    // 时间轴默认展开第1项并添加提示
-    document.querySelectorAll('.tl-item').forEach((item, idx) => {
-      if (idx === 0) item.classList.add('open');
+    // 导航滚动加阴影
+    window.addEventListener('scroll', function(){
+      const nav = document.getElementById('mainNav');
+      if(window.scrollY > 50) nav.classList.add('sticky-shadow');
+      else nav.classList.remove('sticky-shadow');
     });
-
-    // Timeline toggle & map init
-    let mapInited = false;
-    document.querySelectorAll('.tl-item').forEach(item => {
-      item.addEventListener('click', function(e){
-        // 阻止点击内容里的a跳转折叠
-        if (e.target.tagName.toLowerCase() === 'a') return;
-        // 展开收起
-        this.classList.toggle('open');
-        // 改变提示内容
-        let hint = this.querySelector('.tl-hint');
-        if (hint) hint.innerText = this.classList.contains('open') ? '点击可收起' : '点击展开';
-        // 地图
-        if (this.textContent.includes('调研地点') && !mapInited) {
-          const map = L.map('timeline-map').setView([38.9758,100.4453], 10);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-          }).addTo(map);
-          L.marker([38.9758,100.4453]).addTo(map).bindPopup('甘肃省 张掖市 高台县');
-          mapInited = true;
-        }
-      });
+    // 导航高亮
+    const navLinks = document.querySelectorAll('#mainNav a');
+    const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
+    window.addEventListener('scroll', function(){
+      let index = sections.findIndex((sec,i)=> sec.getBoundingClientRect().top - 90 > 0 );
+      if(index === -1) index = sections.length-1;
+      else index = Math.max(0, index-1);
+      navLinks.forEach(l=>l.classList.remove('active'));
+      navLinks[index].classList.add('active');
     });
-
-    // 问卷人数统计
-    function setCount(c) {
-      const el = document.getElementById('survey-count');
-      if (el) el.innerText = c + ' 人';
-    }
-    (function(){
-      const s = document.createElement('script');
-      s.src = 'https://www.wjx.cn/wjx/join/NewCount.aspx?surveyID=wpxJuZP&callback=setCount';
-      s.async = true; document.body.appendChild(s);
-    })();
-
-    // 资源卡片过滤
-    document.querySelectorAll('#resources .filter-bar button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#resources .filter-bar button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const type = btn.dataset.type;
-        document.querySelectorAll('#resources .card').forEach(card => {
-          card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
-        });
-      });
-    });
-    // 资源卡片可点击跳转
-    document.querySelectorAll('#resources .card[data-link]').forEach(card => {
-      card.addEventListener('click', function(){
-        const url = this.dataset.link;
-        if(url) window.open(url, '_blank');
-      });
-      card.style.cursor = 'pointer';
-    });
-
-    // 回到顶部按钮
+    // 回到顶部
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', function(){
       if(window.scrollY > 350){
@@ -691,18 +744,123 @@
     backToTop.addEventListener('click', function(){
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
-
-    // 导航高亮（ScrollSpy）
-    const navLinks = document.querySelectorAll('#mainNav a');
-    const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
-    window.addEventListener('scroll', function(){
-      let index = sections.findIndex((sec,i)=> sec.getBoundingClientRect().top - 90 > 0 );
-      if(index === -1) index = sections.length-1;
-      else index = Math.max(0, index-1);
-      navLinks.forEach(l=>l.classList.remove('active'));
-      navLinks[index].classList.add('active');
+    // 时间轴折叠
+    let mapInited = false;
+    document.querySelectorAll('.tl-item').forEach(item => {
+      item.addEventListener('click', function(e){
+        if (e.target.tagName.toLowerCase() === 'a') return;
+        this.classList.toggle('open');
+        let hint = this.querySelector('.tl-hint');
+        if (hint) hint.innerText = this.classList.contains('open') ? '点击可收起' : '点击展开';
+        if (this.textContent.includes('调研地点') && !mapInited) {
+          const map = L.map('timeline-map').setView([38.9758,100.4453], 10);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+          }).addTo(map);
+          L.marker([38.9758,100.4453]).addTo(map).bindPopup('甘肃省 张掖市 高台县');
+          mapInited = true;
+        }
+      });
     });
-
+    // 资源卡片过滤
+    document.querySelectorAll('#resources .filter-bar button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#resources .filter-bar button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const type = btn.dataset.type;
+        document.querySelectorAll('#resources .card').forEach(card => {
+          card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
+        });
+      });
+    });
+    document.querySelectorAll('#resources .card[data-link]').forEach(card => {
+      card.addEventListener('click', function(){
+        const url = this.dataset.link;
+        if(url) window.open(url, '_blank');
+      });
+      card.style.cursor = 'pointer';
+    });
+    // 问卷人数
+    function setCount(c) {
+      const el = document.getElementById('survey-count');
+      if (el) el.innerText = c + ' 人';
+    }
+    (function(){
+      const s = document.createElement('script');
+      s.src = 'https://www.wjx.cn/wjx/join/NewCount.aspx?surveyID=wpxJuZP&callback=setCount';
+      s.async = true; document.body.appendChild(s);
+    })();
+    // 数据统计动画
+    function animateCount(el, max) {
+      let n = 0, step = Math.ceil(max / 40);
+      let timer = setInterval(() => {
+        n += step;
+        if(n >= max) { n = max; clearInterval(timer);}
+        el.textContent = n;
+      }, 24 + Math.random()*20);
+    }
+    document.querySelectorAll('.stat-num').forEach(num=>{
+      animateCount(num, Number(num.dataset.count));
+    });
+    // 深色模式切换
+    function setDark(dark) {
+      if(dark) { document.body.classList.add('darkmode'); localStorage.setItem('darkmode','1'); document.getElementById('toggle-dark').innerHTML='<i class="fas fa-sun"></i>'; }
+      else { document.body.classList.remove('darkmode'); localStorage.setItem('darkmode','0'); document.getElementById('toggle-dark').innerHTML='<i class="fas fa-moon"></i>'; }
+    }
+    let preferDark = (localStorage.getItem('darkmode')==='1') ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    setDark(preferDark);
+    document.getElementById('toggle-dark').onclick = function(){ setDark(!document.body.classList.contains('darkmode')); };
+    // 粒子背景
+    function isMobile() {
+      return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+    }
+    if(!isMobile() && window.particlesJS){
+      particlesJS('particles-js',{
+        "particles": {
+          "number": { "value": 54, "density": { "enable": true, "value_area": 740 } },
+          "color": { "value": "#f5a623" },
+          "shape": { "type": "circle" },
+          "opacity": { "value": 0.43, "random": true },
+          "size": { "value": 5, "random": true },
+          "line_linked": { "enable": true, "distance": 140, "color": "#fff", "opacity": 0.22, "width": 1.3 },
+          "move": { "enable": true, "speed": 2.2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "attract": { "enable": false } }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+          "modes": { "grab": { "distance": 110, "line_linked": { "opacity": 0.33 } }, "push": { "particles_nb": 2 } }
+        },
+        "retina_detect": true
+      });
+    }
+    // 团队成员弹窗
+    const modal = document.createElement('div');
+    modal.className = 'modal-mask';
+    modal.innerHTML = `<div class="modal-card">
+      <span class="modal-close" title="关闭">&times;</span>
+      <img src="" alt="" />
+      <h3></h3>
+      <div class="desc"></div>
+      <div class="member-extra"></div>
+    </div>`;
+    document.body.appendChild(modal);
+    document.querySelectorAll('#team .card').forEach(card=>{
+      card.onclick = function(e){
+        // 禁止冒泡，弹窗关闭按钮不再冒泡
+        if(e.target.classList.contains('member-extra') || e.target.closest('.member-extra')) return;
+        modal.classList.add('show');
+        modal.querySelector('img').src = card.getAttribute('data-img');
+        modal.querySelector('img').alt = card.getAttribute('data-name');
+        modal.querySelector('h3').textContent = card.getAttribute('data-name');
+        modal.querySelector('.desc').textContent = card.getAttribute('data-title') + " | " + card.getAttribute('data-desc');
+        modal.querySelector('.member-extra').innerHTML = card.querySelector('.member-extra')?.innerHTML || '';
+      }
+    });
+    modal.querySelector('.modal-close').onclick = ()=>{ modal.classList.remove('show'); };
+    modal.onclick = function(e){
+      if(e.target === modal) modal.classList.remove('show');
+    }
   </script>
   <noscript>请启用 JavaScript 以获得更好体验。</noscript>
 </body>

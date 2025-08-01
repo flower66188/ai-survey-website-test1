@@ -1209,10 +1209,9 @@
     }
 	 /* ======= 独立折叠/展开 样式 ======= */
     .overview-card .collapse-content {
-      max-height: 60px;         /* 初始显示高度更紧凑 */
+      max-height: 60px;         /* 初始仅显示部分内容 */
       overflow: hidden;
-      transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
-      opacity: 0;
+      transition: max-height 0.4s ease-in-out;
     }
     @media (min-width: 768px) {
       .overview-card .collapse-content {
@@ -1221,7 +1220,6 @@
     }
     .overview-card .collapse-content.expanded {
       max-height: none;  /* 展开后无限制高度以完整显示内容 */
-      opacity: 1;
     }
     .toggle-btn {
       background: var(--main-orange);
